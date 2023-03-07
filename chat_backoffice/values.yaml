@@ -1,0 +1,34 @@
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+tim-postgresql:
+  image:
+    tag: 14.1.0
+  auth:
+    postgresPassword: postgres
+    username: tim
+    password: "123"
+    database: tim
+
+users-db:
+  image:
+    tag: 14.1.0
+  auth:
+    postgresPassword: postgres
+    username: byk
+    password: "01234"
+    database: byk

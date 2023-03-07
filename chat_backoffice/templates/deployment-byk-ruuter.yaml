@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ruuter
+spec:
+  selector:
+    matchLabels:
+      app: ruuter
+  template:
+    metadata:
+      labels:
+        app: ruuter
+    spec:
+      containers:
+        - name: ruuter
+          image: ruuter  # TODO: change
+          ports:
+            - containerPort: 8080
+              name: http

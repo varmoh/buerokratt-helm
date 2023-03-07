@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: priv-ruuter
+spec:
+  selector:
+    matchLabels:
+      app: priv-ruuter
+  template:
+    metadata:
+      labels:
+        app: priv-ruuter
+    spec:
+      containers:
+        - name: priv-ruuter
+          image: priv-ruuter  # TODO: change
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: ruuter.cors.allowedOrigins
+              value: http://test.buerokratt.ee:3000

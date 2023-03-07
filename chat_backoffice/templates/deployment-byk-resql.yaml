@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-resql
+spec:
+  selector:
+    matchLabels:
+      app: byk-resql
+  template:
+    metadata:
+      labels:
+        app: byk-resql
+    spec:
+      containers:
+        - name: byk-resql
+          image: byk-resql  # TODO: change
+          ports:
+            - containerPort: 8082
+              name: http

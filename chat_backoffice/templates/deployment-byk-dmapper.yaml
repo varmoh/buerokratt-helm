@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-dmapper
+spec:
+  selector:
+    matchLabels:
+      app: byk-dmapper
+  template:
+    metadata:
+      labels:
+        app: byk-dmapper
+    spec:
+      containers:
+        - name: byk-dmapper
+          image: byk-dmapper  # TODO: change
+          ports:
+            - containerPort: 3000
+              name: http
