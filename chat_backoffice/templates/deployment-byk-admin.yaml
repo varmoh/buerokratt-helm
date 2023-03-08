@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-admin
+spec:
+  selector:
+    matchLabels:
+      app: byk-admin
+  template:
+    metadata:
+      labels:
+        app: byk-admin
+    spec:
+      containers:
+        - name: byk-admin
+          image: byk-admin # TODO: change
+          ports:
+            - containerPort: 80
+              name: http
