@@ -15,7 +15,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-tim-postgresql:
+timPostgresql:
   image:
     tag: 14.1.0
   auth:
@@ -24,7 +24,7 @@ tim-postgresql:
     password: "123"
     database: tim
 
-users-db:
+usersDB:
   image:
     tag: 14.1.0
   auth:
