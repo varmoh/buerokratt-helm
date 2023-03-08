@@ -10,11 +10,11 @@ dependencies:
     version: 12.2.2
     repository: https://charts.bitnami.com/bitnami
     tags:
-      - timPostgresql
+      - tim-postgresql
     alias: tim-postgresql
   - name: postgresql
     version: 12.2.2
     repository: https://charts.bitnami.com/bitnami
     tags:
       - users-db
-    alias: usersDB
+    alias: users-db

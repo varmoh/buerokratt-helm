@@ -19,8 +19,9 @@ spec:
       - name: byk-liquibase-update
         image: liquibase/liquibase
         command:
-          - "--url=jdbc:postgresql://usersDB:5432/byk?user=byk"
-          - "--password={{ .Values.usersDB.auth.password }}"
+          - "--url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk"
+          {{ $password := index .Values "users-db" "auth" "password" }}
+          - "--password={{ $password }}"
           - "--changelog-file=/master.yml"
           - "update"
       restartPolicy: Never
