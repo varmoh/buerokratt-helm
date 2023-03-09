@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: byk-tim-env-config
+data:
+  security.allowlist.jwt: {{ .Values.byk.tim.env.security.allowlist.jwt }}
+  {{ $dbName := index .Values "tim-postgresql" "auth" "database" }}
+  spring.datasource.url: "jdbc:postgresql://{{ .Release.Name }}-tim-postgresql:5432/{{ $dbName }}"
+  spring.datasource.username: {{ index .Values "tim-postgresql" "auth" "username" }}
+  auth.success.redirect.whitelist: {{ .Values.byk.tim.env.auth.success.redirect.whitelist }}
+  frontpage.redirect.url: {{ .Values.byk.tim.env.frontpage.redirect.url }}
+  headers.contentSecurityPolicy: {{ .Values.byk.tim.env.headers.contentSecurityPolicy }}
+  cors.allowedOrigins: {{ .Values.byk.tim.env.cors.allowedOrigins }}
+  spring.profiles.active: {{ .Values.byk.tim.env.spring.profiles.active }}
+  logging.level.root: {{ .Values.byk.tim.env.logging.level.root }}
