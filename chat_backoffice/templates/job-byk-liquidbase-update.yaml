@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: byk-liquidbase-update
+  annotations:
+    "helm.sh/hook": post-install, post-upgrade
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    metadata:
+      name: "{{ .Release.Name }}"
+      labels:
+        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      containers:
+      - name: byk-liquibase-update
+        image: liquibase/liquibase
+        command:
+          - "--url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk"
+          {{ $password := index .Values "users-db" "auth" "password" }}
+          - "--password={{ $password }}"
+          - "--changelog-file=/master.yml"
+          - "update"
+      restartPolicy: Never
