@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: byk-tim
+  name: "byk-tim"
 spec:
   selector:
     matchLabels:
@@ -12,14 +12,14 @@ spec:
         app: byk-tim
     spec:
       containers:
-        - name: byk-tim
+        - name: "byk-tim"
           image: riaee/byk-tim:07
           ports:
             - containerPort: 8443
-              name: http
+              name: "http"
           envFrom:
             - configMapRef:
-                name: byk-tim-env-config
+                name: "byk-tim-env-config"
             - secretRef:
                 name:
           env:
@@ -28,33 +28,33 @@ spec:
                 secretKeyRef:
                   name: "{{ .Release.Name }}-tim-postgresql"
                   key: password
-            - name: security.oauth2.client.client-id
-              value: {{ .Values.byk.tim.env.security.oauth2.client.clientId }}
-            - name: security.oauth2.client.client-secret
+            - name: "security.oauth2.client.client-id"
+              value: {{ .Values.byk.tim.env.security.oauth2.client.clientId | quote }}
+            - name: "security.oauth2.client.client-secret"
               valueFrom:
                 secretKeyRef:
-                  name: byk-tim-env-secret
-                  key: oauth2_client_secret
-            - name: security.oauth2.client.registered-redirect-uri
-              value: {{ .Values.byk.tim.env.security.oauth2.client.registeredRedirectUri }}
-            - name: security.oauth2.client.user-authorization-uri
-              value: {{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri }}
-            - name: security.oauth2.client.access-token-uri
-              value: {{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri }}
-            - name: security.oauth2.resource.jwk.key-set-uri
-              value: {{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri }}
-            - name: legacy-portal-integration.legacyUrl
-              value: {{ .Values.byk.tim.env.legacyPortalIntegration.legacyUrl }}
-            - name: legacy-portal-integration.legacyPortalRefererMarker
-              value: {{ .Values.byk.tim.env.legacyPortalIntegration.legacyPortalRefererMarker }}
-            - name: legacy-portal-integration.sessionCookieDomain
-              value: {{ .Values.byk.tim.env.legacyPortalIntegration.sessionCookieDomain }}
-            - name: jwt-integration.signature.issuer
-              value: {{ .Values.byk.tim.env.jwtIntegration.signature.issuer }}
-            - name: jwt-integration.signature.key-store
-              value: {{ .Values.byk.tim.env.jwtIntegration.signature.keyStore }}
-            - name: jwt-integration.signature.key-store-password
+                  name: "byk-tim-env-secret"
+                  key: "oauth2_client_secret"
+            - name: "security.oauth2.client.registered-redirect-uri"
+              value: {{ .Values.byk.tim.env.security.oauth2.client.registeredRedirectUri | quote }}
+            - name: "security.oauth2.client.user-authorization-uri"
+              value: {{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri | quote }}
+            - name: "security.oauth2.client.access-token-uri"
+              value: {{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri | quote }}
+            - name: "security.oauth2.resource.jwk.key-set-uri"
+              value: {{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri | quote }}
+            - name: "legacy-portal-integration.legacyUrl"
+              value: {{ .Values.byk.tim.env.legacyPortalIntegration.legacyUrl | quote }}
+            - name: "legacy-portal-integration.legacyPortalRefererMarker"
+              value: {{ .Values.byk.tim.env.legacyPortalIntegration.legacyPortalRefererMarker | quote }}
+            - name: "legacy-portal-integration.sessionCookieDomain"
+              value: {{ .Values.byk.tim.env.legacyPortalIntegration.sessionCookieDomain | quote }}
+            - name: "jwt-integration.signature.issuer"
+              value: {{ .Values.byk.tim.env.jwtIntegration.signature.issuer | quote }}
+            - name: "jwt-integration.signature.key-store"
+              value: {{ .Values.byk.tim.env.jwtIntegration.signature.keyStore | quote }}
+            - name: "jwt-integration.signature.key-store-password"
               valueFrom:
                 secretKeyRef:
-                  name: byk-tim-env-secret
-                  key: jwt_integration_key_store_password
+                  name: "byk-tim-env-secret"
+                  key: "jwt_integration_key_store_password"
