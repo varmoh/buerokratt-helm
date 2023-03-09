@@ -20,16 +20,16 @@ spec:
           volumeMounts:
             - name: dsl
               mountPath: /DSL
-        initContainers:
-          - name: dsl-installer
-            image: alpine/git:2.36.3
-            volumeMounts:
-              - name: dsl
-                mountPath: /root/DSL
-            command: ["/bin/sh"]
-            args:
-              - "c"
-              - "git clone https://github.com/buerokratt/Ruuter.git /tmp/Ruuter && mv /tmp/Ruuter/DSL /root/ && rm -rf /tmp/Ruuter"
+      initContainers:
+        - name: dsl-installer
+          image: alpine/git:2.36.3
+          volumeMounts:
+            - name: dsl
+              mountPath: /root/DSL
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - "git clone https://github.com/buerokratt/Ruuter.git /tmp/Ruuter && echo 'downloaded' && mv /tmp/Ruuter/DSL/* /root/DSL/ && echo 'moved' && sleep 10 && rm -rf /tmp/Ruuter"
       volumes:
         - name: dsl
           emptyDir: {}
