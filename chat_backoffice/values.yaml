@@ -68,8 +68,6 @@ byk:
         legacyUrl: arendus.eesti.ee
         legacyPortalRefererMarker: https://arendus.eesti.ee/portaal
         sessionCookieDomain: buerokratt.ee
-      cors:
-        allowedOrigins: https://byk.buerokratt.ee,https://admin.byk.buerokratt.ee,https://ruuter.byk.buerokratt.ee,https://priv-ruuter.buerokratt.ee
       jwtIntegration:
         signature:
           issuer: byk.buerokratt.ee
