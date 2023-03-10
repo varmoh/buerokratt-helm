@@ -24,6 +24,10 @@ byk:
     dsl:
       repo: https://github.com/buerokratt/Training-Module.git
       path: DSL/Ruuter.private
+  resql:
+    dsl:
+      repo: https://github.com/buerokratt/Training-Module.git
+      path: DSL/Resql
   tim:
     env:
       security:
