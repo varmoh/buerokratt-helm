@@ -20,8 +20,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: "byk-tim-env-config"
-            - secretRef:
-                name:
           env:
             - name: "spring.datasource.password"
               valueFrom:
