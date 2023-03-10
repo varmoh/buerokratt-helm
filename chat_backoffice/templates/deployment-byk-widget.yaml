@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-widget
-          image: byk-widget # TODO: change
+          image: riaee/byk-chat-widget:13
           ports:
             - containerPort: 443
               name: http
