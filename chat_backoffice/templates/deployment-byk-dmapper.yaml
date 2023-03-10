@@ -29,7 +29,11 @@ spec:
           command: ["/bin/sh"]
           args:
             - "-c"
-            - "git clone $DSL_REPO /tmp/dsl-source && echo 'downloaded' && mv /tmp/dsl-source/$DSL_PATH/* /root/DSL/ && echo 'moved'"
+            - >
+              git clone $DSL_REPO /tmp/dsl-source &&
+              echo 'downloaded' &&
+              mv /tmp/dsl-source/$DSL_PATH/* /root/DSL/ &&
+              echo 'moved'
           env:
             - name: DSL_REPO
               value: {{ .Values.byk.dmapper.dsl.repo }}
