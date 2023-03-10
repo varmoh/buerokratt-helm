@@ -28,6 +28,10 @@ byk:
     dsl:
       repo: https://github.com/buerokratt/Training-Module.git
       path: DSL/Resql
+  dmapper:
+    dsl:
+      repo: https://github.com/buerokratt/Training-Module.git
+      path: DSL/DMapper
   tim:
     env:
       security:
