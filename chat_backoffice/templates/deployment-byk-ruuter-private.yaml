@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: priv-ruuter
-          image: priv-ruuter  # TODO: change
+          image: ghcr.io/varmoh/ruuter:b1f2b6e9646f7a3a7985a5a4b871f6bd99a7c6b9
           ports:
             - containerPort: 8080
               name: http
