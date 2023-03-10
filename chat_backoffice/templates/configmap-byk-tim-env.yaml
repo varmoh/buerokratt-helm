@@ -17,6 +17,6 @@ data:
     connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }};
     frame-src 'self';
     media-src 'none'
-  cors.allowedOrigins: https://{{ .Values.domain }},https://admin.{{ .Values.domain }},https://ruuter.{{ .Values.domain }},https://priv-ruuter.buerokratt.ee
+  cors.allowedOrigins: https://{{ .Values.domain }},https://admin.{{ .Values.domain }},https://ruuter.{{ .Values.domain }},https://priv-ruuter.{{ .Values.domain }}
   spring.profiles.active: {{ .Values.byk.tim.env.spring.profiles.active }}
   logging.level.root: {{ .Values.byk.tim.env.logging.level.root }}
