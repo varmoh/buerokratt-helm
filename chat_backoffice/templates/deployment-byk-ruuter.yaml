@@ -29,7 +29,12 @@ spec:
           command: ["/bin/sh"]
           args:
             - "-c"
-            - "git clone https://github.com/buerokratt/Ruuter.git /tmp/Ruuter && echo 'downloaded' && mv /tmp/Ruuter/DSL/* /root/DSL/ && echo 'moved' && sleep 10 && rm -rf /tmp/Ruuter"
+            - "git clone $DSL_REPO /tmp/Ruuter && echo 'downloaded' && mv /tmp/Ruuter/$DSL_PATH/* /root/DSL/ && echo 'moved' && rm -rf /tmp/Ruuter"
+          env:
+            - name: DSL_REPO
+              value: {{ .Values.byk.ruuter.dsl.repo }}
+            - name: DSL_PATH
+              value: {{ .Values.byk.ruuter.dsl.path }}
       volumes:
         - name: dsl
           emptyDir: {}

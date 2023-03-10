@@ -16,6 +16,10 @@ securityContext: {}
   # runAsUser: 1000
 
 byk:
+  ruuter:
+    dsl:
+      repo: https://github.com/buerokratt/Ruuter.git
+      path: DSL
   tim:
     env:
       security:
