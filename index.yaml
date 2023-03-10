@@ -2,7 +2,29 @@ apiVersion: v1
 entries:
   chat_backoffice:
   - apiVersion: v2
-    created: "2023-03-10T14:05:15.226986+02:00"
+    created: "2023-03-10T15:01:21.919002+02:00"
+    dependencies:
+    - alias: tim-postgresql
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - tim-postgresql
+      version: 12.2.2
+    - alias: users-db
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - users-db
+      version: 12.2.2
+    description: A Helm chart for chat and backoffice services
+    digest: 3a25de2d240e939a353690ea0c98843d9d4df91d23fd6413da4499558323d66f
+    name: chat_backoffice
+    type: application
+    urls:
+    - charts/chat_backoffice-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    created: "2023-03-10T15:01:21.908015+02:00"
     dependencies:
     - alias: tim-postgresql
       name: postgresql
@@ -23,4 +45,4 @@ entries:
     urls:
     - charts/chat_backoffice-0.1.1.tgz
     version: 0.1.1
-generated: "2023-03-10T14:05:15.219815+02:00"
+generated: "2023-03-10T15:01:21.900678+02:00"
