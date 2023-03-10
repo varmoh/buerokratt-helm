@@ -20,6 +20,10 @@ byk:
     dsl:
       repo: https://github.com/buerokratt/Ruuter.git
       path: DSL
+  ruuterPrivate:
+    dsl:
+      repo: https://github.com/buerokratt/Training-Module.git
+      path: DSL/Ruuter.private
   tim:
     env:
       security:
