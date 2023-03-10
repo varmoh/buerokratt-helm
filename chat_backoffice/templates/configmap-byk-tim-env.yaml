@@ -9,7 +9,14 @@ data:
   spring.datasource.username: {{ index .Values "tim-postgresql" "auth" "username" }}
   auth.success.redirect.whitelist: {{ .Values.byk.tim.env.auth.success.redirect.whitelist }}
   frontpage.redirect.url: {{ .Values.byk.tim.env.frontpage.redirect.url }}
-  headers.contentSecurityPolicy: upgrade-insecure-requests; default-src 'self' 'unsafe-inline' 'unsafe-eval' https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }} byk-tim byk-public-ruuter byk-private-ruuter byk-customer-service; object-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://{{ .Values.domain }} https://admin.{{ .Values.domain }} https://tim.{{ .Values.domain }}; connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }}; frame-src 'self'; media-src 'none'
+  headers.contentSecurityPolicy: >
+    upgrade-insecure-requests;
+    default-src 'self' 'unsafe-inline' 'unsafe-eval' https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }} byk-tim byk-public-ruuter byk-private-ruuter byk-customer-service;
+    object-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://{{ .Values.domain }} https://admin.{{ .Values.domain }} https://tim.{{ .Values.domain }};
+    connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }};
+    frame-src 'self';
+    media-src 'none'
   cors.allowedOrigins: {{ .Values.byk.tim.env.cors.allowedOrigins }}
   spring.profiles.active: {{ .Values.byk.tim.env.spring.profiles.active }}
   logging.level.root: {{ .Values.byk.tim.env.logging.level.root }}
