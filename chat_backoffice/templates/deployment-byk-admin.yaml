@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-admin
-          image: byk-admin # TODO: change
+          image: riaee/byk-customer-service:18
           ports:
             - containerPort: 80
               name: http

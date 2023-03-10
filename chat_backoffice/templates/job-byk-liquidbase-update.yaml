@@ -24,4 +24,31 @@ spec:
           - "--password={{ $password }}"
           - "--changelog-file=/master.yml"
           - "update"
+        volumeMounts:
+          - name: dsl
+            mountPath: /DSL
+      initContainers:
+        - name: dsl-installer
+          image: alpine/git:2.36.3
+          volumeMounts:
+            - name: dsl
+              mountPath: /root/DSL
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              git clone $DSL_REPO /tmp/dsl-source &&
+              echo 'downloaded' &&
+              mv /tmp/dsl-source/$DSL_PATH/master.yml /root/DSL/ &&
+              mv /tmp/dsl-source/$DSL_PATH/changelog /root/DSL/ &&
+              mv /tmp/dsl-source/$DSL_PATH/data /root/DSL/ &&
+              echo 'moved'
+          env:
+            - name: DSL_REPO
+              value: {{ .Values.byk.ruuter.dsl.repo }}
+            - name: DSL_PATH
+              value: {{ .Values.byk.ruuter.dsl.path }}
+      volumes:
+        - name: dsl
+          emptyDir: {}
       restartPolicy: Never
