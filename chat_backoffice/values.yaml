@@ -32,6 +32,10 @@ byk:
     dsl:
       repo: https://github.com/buerokratt/Training-Module.git
       path: DSL/DMapper
+  liquidbase:
+    dsl:
+      repo: https://github.com/buerokratt/Training-Module.git
+      path: DSL/Liquidbase
   tim:
     env:
       security:
