@@ -34,8 +34,12 @@ byk:
       path: DSL/DMapper
   liquidbase:
     dsl:
-      repo: https://github.com/buerokratt/Training-Module.git
-      path: DSL/Liquidbase
+      repo: https://github.com/buerokratt/Buerokratt-Chatbot.git
+      path: DSL.Liquidbase
+  widget:
+    index:
+      repo: https://github.com/buerokratt/Installation-Guides.git
+      path: default-setup/backoffice-and-bykstack/chat-widget/index.html
   tim:
     env:
       security:

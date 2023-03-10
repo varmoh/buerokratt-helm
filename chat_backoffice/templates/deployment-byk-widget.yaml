@@ -17,3 +17,29 @@ spec:
           ports:
             - containerPort: 443
               name: http
+          volumeMounts:
+            - name: dsl
+              mountPath: /usr/share/nginx/html/widget/index.html
+              subPath: index.html
+      initContainers:
+        - name: dsl-installer
+          image: alpine/git:2.36.3
+          volumeMounts:
+            - name: dsl
+              mountPath: /root/DSL
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              git clone $INDEX_REPO /tmp/index-source &&
+              echo 'downloaded' &&
+              mv /tmp/index-source/$INDEX_PATH /root/DSL/ &&
+              echo 'moved'
+          env:
+            - name: INDEX_REPO
+              value: {{ .Values.byk.widget.index.repo }}
+            - name: INDEX_PATH
+              value: {{ .Values.byk.widget.index.path }}
+      volumes:
+        - name: dsl
+          emptyDir: {}
