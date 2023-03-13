@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: "byk-tim"
-          image: ghcr.io/varmoh/tim:691e8ecc17b1e918d0799027dc48ce2ff59ea14c
+          image: "riaee/byk-tim:07"
           ports:
             - containerPort: 8443
               name: "http"
