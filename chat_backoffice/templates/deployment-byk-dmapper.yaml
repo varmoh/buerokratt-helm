@@ -42,6 +42,3 @@ spec:
       volumes:
         - name: dsl
           emptyDir: {}
-        - name: ruuter-server-config
-          configMap:
-            name: ruuter-config

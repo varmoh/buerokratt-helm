@@ -20,7 +20,6 @@ spec:
           volumeMounts:
             - name: dsl
               mountPath: /DSL
-            {{ include "tomcat.server-config" | nindent 12 }}
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3
