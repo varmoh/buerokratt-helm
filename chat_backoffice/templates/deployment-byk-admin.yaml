@@ -24,4 +24,4 @@ spec:
       volumes:
         - name: admin-nginx
           configMap:
-            name: admin-nginx-config
+            name: byk-admin-nginx-config

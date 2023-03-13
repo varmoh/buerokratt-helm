@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: admin-nginx-config
+  name: byk-admin-nginx-config
 data:
   nginx.conf: |
     server {

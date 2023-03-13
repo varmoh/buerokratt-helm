@@ -4,7 +4,7 @@ metadata:
   name: ruuter
 spec:
   selector:
-    app: ruuter
+    app: byk-ruuter
   ports:
     - port: 8080
       targetPort: http

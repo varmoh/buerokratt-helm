@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ruuter-byk-tim-ingress
+  labels:
+    name: ruuter-byk-tim-ingress
+spec:
+  rules:
+  - host: tim.{{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: byk-tim
+            port:
+              number: 8443
