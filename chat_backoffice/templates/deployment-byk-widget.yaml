@@ -21,6 +21,9 @@ spec:
             - name: dsl
               mountPath: /usr/share/nginx/html/widget/index.html
               subPath: index.html
+            - name: widget-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: nginx.conf
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3
@@ -43,3 +46,6 @@ spec:
       volumes:
         - name: dsl
           emptyDir: {}
+        - name: widget-config
+          configMap:
+            name: widget-nginx-config
