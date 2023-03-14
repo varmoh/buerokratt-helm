@@ -18,11 +18,11 @@ spec:
       containers:
       - name: byk-liquibase-update
         image: liquibase/liquibase
-        command:
+        args:
           - "--url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk"
           {{ $password := index .Values "users-db" "auth" "password" }}
           - "--password={{ $password }}"
-          - "--changelog-file=/master.yml"
+          - "--changelog-file=/DSL/master.yml"
           - "update"
         volumeMounts:
           - name: dsl
