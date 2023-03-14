@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: byk-widget-ingress
+  labels:
+    name: byk-widget-ingress
+spec:
+  rules:
+  - host: {{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: byk-widget
+            port:
+              number: 8443

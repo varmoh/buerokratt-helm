@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ruuter-ingress
+  labels:
+    name: ruuter-ingress
+spec:
+  rules:
+  - host: ruuter.{{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: byk-ruuter
+            port:
+              number: 8080

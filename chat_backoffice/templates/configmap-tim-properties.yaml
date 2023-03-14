@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: byk-tim-config
+data:
+  application.properties: |
+    security.oauth2.client.client-id={{ .Values.byk.tim.env.security.oauth2.client.clientId | quote }}
+    security.oauth2.client.client-secret="${OAUTH2_CLIENT_SECRET}"
+    security.oauth2.client.scope={{ .Values.byk.tim.env.security.oauth2.client.scope | quote }}
+    security.oauth2.client.registered-redirect-uri={{ .Values.byk.tim.env.security.oauth2.client.registeredRedirectUri | quote }}
+    security.oauth2.client.user-authorization-uri={{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri | quote }}
+    security.oauth2.client.access-token-uri={{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri | quote }}
+    security.oauth2.resource.jwk.key-set-uri={{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri | quote }}
+    security.allowlist.jwt={{ .Values.byk.tim.env.security.allowlist.jwt | quote }}
+
+    frontpage.redirect.url={{ .Values.byk.tim.env.frontpage.redirect.url | quote }}
+
+    logging.level.root={{ .Values.byk.tim.env.logging.level.root | quote }}
+    {{ $dbName := index .Values "tim-postgresql" "auth" "database" }}
+    spring.datasource.url="jdbc:postgresql://{{ .Release.Name }}-tim-postgresql:5432/{{ $dbName }}"
+    spring.datasource.username={{ index .Values "tim-postgresql" "auth" "username" | quote }}
+    spring.datasource.password="${DB_PASSWORD}"
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.liquibase.change-log=classpath:master.xml
+
+    spring.profiles.active={{ .Values.byk.tim.env.spring.profiles.active | quote }}
+
+    #legacy integration properties
+
+    #this defines the name of the cookie to write the sessionId into
+    #how long the legacy session will last
+    legacy-portal-integration.sessionCookieName=PHPSESSID
+    # this should match the legacy cookie domain name
+    legacy-portal-integration.sessionCookieDomain={{ .Values.byk.tim.env.legacyPortalIntegration.sessionCookieDomain | quote }}
+    #is TARA auth module deployed on the same domain as legacy portal?
+    # should be set to false only in development mode
+    legacy-portal-integration.taraAuthDeployedOnLegacyDomain=true
+    #Note! this also affects the JWT timeout periodv
+    legacy-portal-integration.sessionTimeoutMinutes=30
+    legacy-portal-integration.requestIpHeader=X-FORWARDED-FOR
+    legacy-portal-integration.requestIpAttribute=request_ip
+    legacy-portal-integration.redirectUrlHeader=Referer
+    legacy-portal-integration.redirectUrlAttribute=url_redirect
+    # Marker to determine if the user should be redirected back to legacy portal or not
+    # Marker is searched in the Referer HTTP header
+    legacy-portal-integration.legacyPortalRefererMarker={{ .Values.byk.tim.env.legacyPortalIntegration.legacyPortalRefererMarker | quote }}
+    # Location of legacy portal to redirect to, in case legacyPortalRefererMarker gives a positive match
+    legacy-portal-integration.legacyUrl="{{ .Values.byk.tim.env.legacyPortalIntegration.legacyUrl | quote }}"
+
+    # JWT configuration properties
+    # location of the private key that will be used for signing JWT tokens
+
+
+    # to generate the key and the keystore use:
+    # keytool -genkeypair -keyalg rsa -keysize 2048 -alias jwtsign -keystore jwtkeystore.jks
+    # NB! password for both keystore and alias should be the same
+    jwt-integration.signature.key-store={{ .Values.byk.tim.env.jwtIntegration.signature.keyStore | quote }}
+    jwt-integration.signature.key-store-password=${KEY_STORE_PASSWORD}
+    jwt-integration.signature.keyStoreType=JKS
+    jwt-integration.signature.keyAlias=jwtsign
+    #Jwt issuer property
+    jwt-integration.signature.issuer={{ .Values.byk.tim.env.jwtIntegration.signature.issuer | quote }}
+    #Jwt cookie name property
+    jwt-integration.signature.cookieName=JWTTOKEN
+
+
+    userIPHeaderName = x-forwarded-for
+    #append a whitespace character at the end of prefix (before newline) if you want it to be separate from main message body
+    userIPLoggingPrefix = from IP
+    userIPLoggingMDCkey = userIP
+
+    headers.contentSecurityPolicy=upgrade-insecure-requests;default-src 'self' 'unsafe-inline' 'unsafe-eval' https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }} byk-tim byk-public-ruuter byk-private-ruuter byk-customer-service;object-src 'self';script-src 'self' 'unsafe-inline' 'unsafe-eval' https://{{ .Values.domain }} https://admin.{{ .Values.domain }} https://tim.{{ .Values.domain }};connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }};frame-src 'self';media-src 'none'
+    cors.allowedOrigins=https://{{ .Values.domain }},https://admin.{{ .Values.domain }},https://ruuter.{{ .Values.domain }},https://priv-ruuter.{{ .Values.domain }}
+    auth.success.redirect.whitelist={{ .Values.byk.tim.env.auth.success.redirect.whitelist }}
+
+    server.port=8085
