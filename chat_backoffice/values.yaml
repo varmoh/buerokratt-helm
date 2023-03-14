@@ -51,6 +51,7 @@ byk:
           client:
             clientId: tara_client_id
             clientSecret: tara_client_secret
+            scope: openid
             registeredRedirectUri: https://tim.byk.buerokratt.ee/authenticate
             userAuthorizationUri: https://tara-test.ria.ee/oidc/authorize
             accessTokenUri: https://tara-test.ria.ee/oidc/token

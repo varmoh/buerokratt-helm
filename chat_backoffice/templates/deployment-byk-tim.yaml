@@ -15,44 +15,29 @@ spec:
         - name: "byk-tim"
           image: "riaee/byk-tim:07"
           ports:
-            - containerPort: 8443
+            - containerPort: 8080
               name: "http"
-          envFrom:
-            - configMapRef:
-                name: "byk-tim-env-config"
           env:
-            - name: "spring.datasource.password"
+            - name: "DB_PASSWORD"
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Release.Name }}-tim-postgresql"
                   key: password
-            - name: "security.oauth2.client.client-id"
-              value: {{ .Values.byk.tim.env.security.oauth2.client.clientId | quote }}
-            - name: "security.oauth2.client.client-secret"
+            - name: "OAUTH2_CLIENT_SECRET"
               valueFrom:
                 secretKeyRef:
                   name: "byk-tim-env-secret"
                   key: "oauth2_client_secret"
-            - name: "security.oauth2.client.registered-redirect-uri"
-              value: {{ .Values.byk.tim.env.security.oauth2.client.registeredRedirectUri | quote }}
-            - name: "security.oauth2.client.user-authorization-uri"
-              value: {{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri | quote }}
-            - name: "security.oauth2.client.access-token-uri"
-              value: {{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri | quote }}
-            - name: "security.oauth2.resource.jwk.key-set-uri"
-              value: {{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri | quote }}
-            - name: "legacy-portal-integration.legacyUrl"
-              value: {{ .Values.byk.tim.env.legacyPortalIntegration.legacyUrl | quote }}
-            - name: "legacy-portal-integration.legacyPortalRefererMarker"
-              value: {{ .Values.byk.tim.env.legacyPortalIntegration.legacyPortalRefererMarker | quote }}
-            - name: "legacy-portal-integration.sessionCookieDomain"
-              value: {{ .Values.byk.tim.env.legacyPortalIntegration.sessionCookieDomain | quote }}
-            - name: "jwt-integration.signature.issuer"
-              value: {{ .Values.byk.tim.env.jwtIntegration.signature.issuer | quote }}
-            - name: "jwt-integration.signature.key-store"
-              value: {{ .Values.byk.tim.env.jwtIntegration.signature.keyStore | quote }}
-            - name: "jwt-integration.signature.key-store-password"
+            - name: "KEY_STORE_PASSWORD"
               valueFrom:
                 secretKeyRef:
                   name: "byk-tim-env-secret"
                   key: "jwt_integration_key_store_password"
+          volumeMounts:
+            - name: tomcat-config
+              mountPath: /usr/local/tomcat/conf/server.xml
+              subPath: server.xml
+      volumes:
+        - name: tomcat-config
+          configMap:
+            name: tomcat-server-config
