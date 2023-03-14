@@ -18,12 +18,17 @@ spec:
       containers:
       - name: byk-liquibase-update
         image: liquibase/liquibase
+        command: ["/bin/sh"]
         args:
-          - "--url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk"
-          {{ $password := index .Values "users-db" "auth" "password" }}
-          - "--password={{ $password }}"
-          - "--changelog-file=/DSL/master.yml"
-          - "update"
+          - "-c"
+          - >
+            ls -l /DSL &&
+            liquibase
+            "--url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk"
+            {{ $password := index .Values "users-db" "auth" "password" }}
+            "--password={{ $password }}"
+            "--changelog-file=/DSL/master.yml"
+            "update"
         volumeMounts:
           - name: dsl
             mountPath: /DSL
@@ -42,7 +47,8 @@ spec:
               mv /tmp/dsl-source/$DSL_PATH/master.yml /root/DSL/ &&
               mv /tmp/dsl-source/$DSL_PATH/changelog /root/DSL/ &&
               mv /tmp/dsl-source/$DSL_PATH/data /root/DSL/ &&
-              echo 'moved'
+              echo 'moved' &&
+              ls /root/DSL
           env:
             - name: DSL_REPO
               value: {{ .Values.byk.liquibase.dsl.repo }}
