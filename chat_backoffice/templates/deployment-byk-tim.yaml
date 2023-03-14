@@ -37,7 +37,13 @@ spec:
             - name: tomcat-config
               mountPath: /usr/local/tomcat/conf/server.xml
               subPath: server.xml
+            - name: application-properties
+              mountPath: /workspace/app/src/main/resources/application.properties
+              subPath: application.properties
       volumes:
         - name: tomcat-config
           configMap:
             name: tomcat-server-config
+        - name: application-properties
+          configMap:
+            name: byk-tim-config

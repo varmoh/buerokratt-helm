@@ -34,10 +34,10 @@ byk:
     dsl:
       repo: https://github.com/buerokratt/Training-Module.git
       path: DSL/DMapper
-  liquidbase:
+  liquibase:
     dsl:
       repo: https://github.com/buerokratt/Buerokratt-Chatbot.git
-      path: DSL.Liquidbase
+      path: DSL.Liquibase
   widget:
     index:
       repo: https://github.com/buerokratt/Installation-Guides.git

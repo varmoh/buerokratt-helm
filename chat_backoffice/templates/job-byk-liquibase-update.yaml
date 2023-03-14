@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: byk-liquidbase-update
+  name: byk-liquibase-update
   annotations:
     "helm.sh/hook": post-install, post-upgrade
     "helm.sh/hook-weight": "1"
@@ -45,9 +45,9 @@ spec:
               echo 'moved'
           env:
             - name: DSL_REPO
-              value: {{ .Values.byk.ruuter.dsl.repo }}
+              value: {{ .Values.byk.liquibase.dsl.repo }}
             - name: DSL_PATH
-              value: {{ .Values.byk.ruuter.dsl.path }}
+              value: {{ .Values.byk.liquibase.dsl.path }}
       volumes:
         - name: dsl
           emptyDir: {}

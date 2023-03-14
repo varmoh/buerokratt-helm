@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: byk-tim-config
 data:
-  application.properties:
+  application.properties: |
     security.oauth2.client.client-id={{ .Values.byk.tim.env.security.oauth2.client.clientId | quote }}
     security.oauth2.client.client-secret="${OAUTH2_CLIENT_SECRET}"
     security.oauth2.client.scope={{ .Values.byk.tim.env.security.oauth2.client.scope | quote }}
