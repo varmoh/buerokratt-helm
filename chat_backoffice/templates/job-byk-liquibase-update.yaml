@@ -19,16 +19,15 @@ spec:
       - name: byk-liquibase-update
         image: liquibase/liquibase
         command: ["/bin/sh"]
+        {{ $password := index .Values "users-db" "auth" "password" }}
         args:
           - "-c"
           - >
             ls -l /DSL &&
-            liquibase
-            "--url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk"
-            {{ $password := index .Values "users-db" "auth" "password" }}
-            "--password={{ $password }}"
-            "--changelog-file=/DSL/master.yml"
-            "update"
+            liquibase --url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk
+            --password={{ $password }}
+            --changelog-file=/DSL/master.yml
+            update
         volumeMounts:
           - name: dsl
             mountPath: /DSL
