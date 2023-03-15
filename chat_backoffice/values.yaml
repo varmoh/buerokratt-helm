@@ -17,6 +17,9 @@ securityContext: {}
 
 domain: byk.buerokratt.ee
 
+ingress:
+  certIssuerName: letsencrypt-prod-issuer
+
 byk:
   ruuter:
     dsl:
