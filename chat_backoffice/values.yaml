@@ -52,19 +52,11 @@ byk:
             clientId: tara_client_id
             clientSecret: tara_client_secret
             scope: openid
-            registeredRedirectUri: https://tim.byk.buerokratt.ee/authenticate
             userAuthorizationUri: https://tara-test.ria.ee/oidc/authorize
             accessTokenUri: https://tara-test.ria.ee/oidc/token
           resource:
             jwk:
               keySetUri: https://tara-test.ria.ee/oidc/jwks
-      auth:
-        success:
-          redirect:
-            whitelist: https://admin.byk.buerokratt.ee/auth/callback,https://byk.buerokratt.ee,https://byk.buerokratt.ee/auth/callback,https://admin.byk.buerokratt.ee
-      frontpage:
-        redirect:
-          url: https://admin.byk.buerokratt.ee
       legacyPortalIntegration:
         legacyUrl: arendus.eesti.ee
         legacyPortalRefererMarker: https://arendus.eesti.ee/portaal
