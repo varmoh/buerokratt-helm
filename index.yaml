@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   chat_backoffice:
   - apiVersion: v2
-    created: "2023-03-14T16:50:24.552361+02:00"
+    created: "2023-03-15T11:10:36.059727+02:00"
     dependencies:
     - alias: tim-postgresql
       name: postgresql
@@ -17,10 +17,10 @@ entries:
       - users-db
       version: 12.2.2
     description: A Helm chart for chat and backoffice services
-    digest: 84cd6657840341c8bbd7d1becde791542b9bab1d48195b5547ae67867e370fc7
+    digest: 55f0f453bcf99aa615167640aa07126c2618ab5a45fbecbec239f47befbdb83c
     name: chat_backoffice
     type: application
     urls:
-    - charts/chat_backoffice-0.1.5.tgz
-    version: 0.1.5
-generated: "2023-03-14T16:50:24.545262+02:00"
+    - charts/chat_backoffice-0.1.6.tgz
+    version: 0.1.6
+generated: "2023-03-15T11:10:36.052215+02:00"
