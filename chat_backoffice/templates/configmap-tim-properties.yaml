@@ -7,13 +7,13 @@ data:
     security.oauth2.client.client-id={{ .Values.byk.tim.env.security.oauth2.client.clientId | quote }}
     security.oauth2.client.client-secret="${OAUTH2_CLIENT_SECRET}"
     security.oauth2.client.scope={{ .Values.byk.tim.env.security.oauth2.client.scope | quote }}
-    security.oauth2.client.registered-redirect-uri={{ .Values.byk.tim.env.security.oauth2.client.registeredRedirectUri | quote }}
+    security.oauth2.client.registered-redirect-uri=https://tim.{{ .Values.domain }}/authenticate
     security.oauth2.client.user-authorization-uri={{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri | quote }}
     security.oauth2.client.access-token-uri={{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri | quote }}
     security.oauth2.resource.jwk.key-set-uri={{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri | quote }}
     security.allowlist.jwt={{ .Values.byk.tim.env.security.allowlist.jwt | quote }}
 
-    frontpage.redirect.url={{ .Values.byk.tim.env.frontpage.redirect.url | quote }}
+    frontpage.redirect.url=https://admin.{{ .Values.domain }}
 
     logging.level.root={{ .Values.byk.tim.env.logging.level.root | quote }}
     {{ $dbName := index .Values "tim-postgresql" "auth" "database" }}
@@ -71,6 +71,6 @@ data:
 
     headers.contentSecurityPolicy=upgrade-insecure-requests;default-src 'self' 'unsafe-inline' 'unsafe-eval' https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }} byk-tim byk-public-ruuter byk-private-ruuter byk-customer-service;object-src 'self';script-src 'self' 'unsafe-inline' 'unsafe-eval' https://{{ .Values.domain }} https://admin.{{ .Values.domain }} https://tim.{{ .Values.domain }};connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }};frame-src 'self';media-src 'none'
     cors.allowedOrigins=https://{{ .Values.domain }},https://admin.{{ .Values.domain }},https://ruuter.{{ .Values.domain }},https://priv-ruuter.{{ .Values.domain }}
-    auth.success.redirect.whitelist={{ .Values.byk.tim.env.auth.success.redirect.whitelist }}
+    auth.success.redirect.whitelist=https://admin.{{ .Values.domain }}/auth/callback,https://{{ .Values.domain }},https://{{ .Values.domain }}/auth/callback,https://admin.{{ .Values.domain }}
 
     server.port=8085
