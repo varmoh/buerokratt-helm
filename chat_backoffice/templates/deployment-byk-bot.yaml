@@ -37,7 +37,7 @@ spec:
               echo 'downloaded' &&
               mv /tmp/intallation-guides/default-setup/chatbot-and-training/bot/loba/* /app/ &&
               ls /app/ &&
-              echo 'training'
+              echo 'training' &&
               rasa train --fixed-model-name loba-model
       volumes:
         - name: loba
