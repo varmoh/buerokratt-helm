@@ -10,7 +10,7 @@ data:
       "tim_url": "http://byk-tim:8080",
       "resql_url": "http://byk-resql:8082",
       "bot_url": "http://byk-bot:5005",
-      "training_url": "TRAINIG_BOT", # TODO investigate
+      "training_url": "http://byk-bot:5005",
       "training_user": "TRAINING_BOT_USERNAME",
       "training_prv_key": "TRAINIG_BOT_PRIVATE_SSH_KEY_PATH",
       "training_bot_directory_name": "TRAINING_DATA_DIRECTORY",
@@ -25,7 +25,7 @@ data:
       "tim_url": "http://byk-tim:8080",
       "resql_url": "http://byk-resql:8082",
       "bot_url": "http://byk-bot:5005",
-      "training_url": "TRAINIG_BOT",
+      "training_url": "http://byk-bot:5005",
       "training_user": "TRAINING_BOT_USERNAME",
       "training_prv_key": "TRAINIG_BOT_PRIVATE_SSH_KEY_PATH",
       "training_bot_directory_name": "TRAINING_DATA_DIRECTORY",
