@@ -61,8 +61,8 @@ byk:
             jwk:
               keySetUri: https://tara-test.ria.ee/oidc/jwks
       legacyPortalIntegration:
-        legacyUrl: arendus.eesti.ee
-        legacyPortalRefererMarker: https://arendus.eesti.ee/portaal
+        legacyUrl: some.example.com
+        legacyPortalRefererMarker: https://some.example.com/portal
         sessionCookieDomain: buerokratt.ee
       jwtIntegration:
         signature:
