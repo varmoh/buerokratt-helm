@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-bot
+spec:
+  selector:
+    matchLabels:
+      app: byk-bot
+  template:
+    metadata:
+      labels:
+        app: byk-bot
+    spec:
+      containers:
+        - name: byk-bot
+          image: "riaee/byk:bot-20220728"
+          args:
+            - "run"
+          ports:
+            - containerPort: 5005
+              name: http
+          volumeMounts:
+            - name: loba
+              mountPath: /app
+      initContainers:
+        - name: byk-train-bot
+          image: "riaee/byk:bot-20220728"
+          volumeMounts:
+            - name: loba
+              mountPath: /app
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              apt update && apt install -y git &&
+              git clone https://github.com/buerokratt/Installation-Guides/ /tmp/intallation-guides &&
+              echo 'downloaded' &&
+              mv /tmp/intallation-guides/default-setup/chatbot-and-training/bot/loba/* /app/ &&
+              ls /app/ &&
+              echo 'training' &&
+              rasa train --fixed-model-name loba-model
+      volumes:
+        - name: loba
+          emptyDir: {}
+        # TODO: mount https://github.com/buerokratt/Installation-Guides/tree/main/default-setup/chatbot-and-training/bot/loba

@@ -20,6 +20,9 @@ spec:
           volumeMounts:
             - name: dsl
               mountPath: /DSL
+            - name: urls-env
+              mountPath: /usr/local/tomcat/urls.env.json
+              subPath: public.urls.docker.json
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3
@@ -42,3 +45,6 @@ spec:
       volumes:
         - name: dsl
           emptyDir: {}
+        - name: urls-env
+          configMap:
+            name: urls-env-config

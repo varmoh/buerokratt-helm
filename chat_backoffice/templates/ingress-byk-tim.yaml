@@ -20,7 +20,7 @@ spec:
           service:
             name: byk-tim
             port:
-              number: 8443
+              number: 8080
   tls:
   - hosts:
     - tim.{{ .Values.domain }}
