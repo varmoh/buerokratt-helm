@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: urls-env-config
+data:
+  public.urls.docker.json: |
+    {
+      "dmapper_url": "http://byk-dmapper:3000",
+      "ruuter_url": "http://localhost:8080",
+      "tim_url": "http://byk-tim:8080",
+      "resql_url": "http://byk-resql:8082",
+      "bot_url": "http://byk-bot:5005",
+      "training_url": "TRAINIG_BOT", # TODO investigate
+      "training_user": "TRAINING_BOT_USERNAME",
+      "training_prv_key": "TRAINIG_BOT_PRIVATE_SSH_KEY_PATH",
+      "training_bot_directory_name": "TRAINING_DATA_DIRECTORY",
+      "gazetteer_url":"https://inaadress.maaamet.ee/inaadress",
+      "publicapi_url": "https://publicapi.envir.ee/v1/combinedWeatherData",
+      "ilmmicroservice_url": "https://ilmmicroservice.envir.ee/api/forecasts"
+    }
+  private.urls.docker.json: |
+    {
+      "dmapper_url": "http://byk-dmapper:3000",
+      "ruuter_url": "http://localhost:8080",
+      "tim_url": "http://byk-tim:8080",
+      "resql_url": "http://byk-resql:8082",
+      "bot_url": "http://byk-bot:5005",
+      "training_url": "TRAINIG_BOT",
+      "training_user": "TRAINING_BOT_USERNAME",
+      "training_prv_key": "TRAINIG_BOT_PRIVATE_SSH_KEY_PATH",
+      "training_bot_directory_name": "TRAINING_DATA_DIRECTORY",
+      "gazetteer_url":"https://inaadress.maaamet.ee/inaadress",
+      "publicapi_url": "https://publicapi.envir.ee/v1/combinedWeatherData",
+      "ilmmicroservice_url": "https://ilmmicroservice.envir.ee/api/forecasts"
+    }
