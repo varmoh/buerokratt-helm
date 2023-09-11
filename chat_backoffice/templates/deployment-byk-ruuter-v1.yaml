@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ruuter
+spec:
+  selector:
+    matchLabels:
+      app: ruuter
+  template:
+    metadata:
+      labels:
+        app: ruuter
+    spec:
+      containers:
+        - name: ruuter
+          image: ghcr.io/buerokratt/ruuter-1.0:beta-1.1.0
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - name: dsl
+              mountPath: /DSL
+            - name: urls-env
+              mountPath: /usr/local/tomcat/urls.env.json
+              subPath: public.urls.docker.json
+      initContainers:
+        - name: dsl-installer
+          image: alpine/git:2.36.3
+          volumeMounts:
+            - name: dsl
+              mountPath: /root/DSL
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              git clone $DSL_REPO /tmp/dsl-source &&
+              echo 'downloaded' &&
+              mv /tmp/dsl-source/$DSL_PATH/* /root/DSL/ &&
+              echo 'moved'
+          env:
+            - name: DSL_REPO
+              value: {{ .Values.byk.ruuter.dsl.repo }}
+            - name: DSL_PATH
+              value: {{ .Values.byk.ruuter.dsl.path }}
+      volumes:
+        - name: dsl
+          emptyDir: {}
+        - name: urls-env
+          configMap:
+            name: urls-env-config
