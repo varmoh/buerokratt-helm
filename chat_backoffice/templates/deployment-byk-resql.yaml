@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-resql
-          image: ghcr.io/varmoh/resql:4fe8beff1babd5c5cfba4b09edbd7ce1f3c3a5b4
+          image: ghcr.io/buerokratt/resql:prod-2.1.0
           ports:
             - containerPort: 8082
               name: http

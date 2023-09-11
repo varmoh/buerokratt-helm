@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-bot
-          image: "riaee/byk:bot-20220728"
+          image: "rasa/rasa:3.0.13"
           args:
             - "run"
           ports:
@@ -24,7 +24,7 @@ spec:
               mountPath: /app
       initContainers:
         - name: byk-train-bot
-          image: "riaee/byk:bot-20220728"
+          image: "rasa/rasa:3.0.13"
           volumeMounts:
             - name: loba
               mountPath: /app

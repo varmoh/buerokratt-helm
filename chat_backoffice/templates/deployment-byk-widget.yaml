@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-widget
-          image: ghcr.io/varmoh/chat-widget:cd2071bbeb3e5ccc5329c9b4bd871c1f7dadcd22
+          image: ghcr.io/buerokratt/chat-widget:beta-1.0.1
           ports:
             - containerPort: 443
               name: http

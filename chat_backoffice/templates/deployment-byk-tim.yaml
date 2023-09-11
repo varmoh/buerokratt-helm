@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: "byk-tim"
-          image: "riaee/byk-tim:07"
+          image: "ghcr.io/buerokratt/tim:prod-2.0.0"
           ports:
             - containerPort: 8080
               name: "http"

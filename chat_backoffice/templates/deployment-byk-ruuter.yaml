@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: ruuter
-          image: ghcr.io/varmoh/ruuter:b1f2b6e9646f7a3a7985a5a4b871f6bd99a7c6b9
+          image: ghcr.io/buerokratt/ruuter:beta-2.0.0
           ports:
             - containerPort: 8080
               name: http
