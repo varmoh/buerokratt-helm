@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-anonymizer-gui
+spec:
+  selector:
+    matchLabels:
+      app: byk-anonymizer-gui
+  template:
+    metadata:
+      labels:
+        app: byk-anonymizer-gui
+    spec:
+      containers:
+        - name: byk-anonymizer-gui
+          image: "ghcr.io/buerokratt/data-anonymizer:beta-1.0.0"
+          ports:
+            - containerPort: 80 # TODO: use the correct one
+              name: http

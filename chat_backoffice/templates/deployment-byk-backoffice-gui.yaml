@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-backoffice-gui
+spec:
+  selector:
+    matchLabels:
+      app: byk-backoffice-gui
+  template:
+    metadata:
+      labels:
+        app: byk-backoffice-gui
+    spec:
+      containers:
+        - name: byk-backoffice-gui
+          image: "ghcr.io/buerokratt/buerokratt-chatbot:beta-1.0.0"
+          ports:
+            - containerPort: 3001
+              name: http

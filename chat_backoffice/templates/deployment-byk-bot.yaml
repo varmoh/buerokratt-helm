@@ -22,6 +22,7 @@ spec:
           volumeMounts:
             - name: loba
               mountPath: /app
+      # TODO: Move to a separate deployment
       initContainers:
         - name: byk-train-bot
           image: "rasa/rasa:3.0.13"

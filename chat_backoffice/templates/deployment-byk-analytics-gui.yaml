@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-analytics-gui
+spec:
+  selector:
+    matchLabels:
+      app: byk-analytics-gui
+  template:
+    metadata:
+      labels:
+        app: byk-analytics-gui
+    spec:
+      containers:
+        - name: byk-analytics-gui
+          image: "ghcr.io/buerokratt/analytics-module:beta-1.0.0"
+          ports:
+            - containerPort: 3001
+              name: http

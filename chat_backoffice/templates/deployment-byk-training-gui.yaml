@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-training-gui
+spec:
+  selector:
+    matchLabels:
+      app: byk-training-gui
+  template:
+    metadata:
+      labels:
+        app: byk-training-gui
+    spec:
+      containers:
+        - name: byk-training-gui
+          image: "ghcr.io/buerokratt/training-module:beta-1.0.0"
+          ports:
+            - containerPort: 80
+              name: http
