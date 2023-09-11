@@ -22,7 +22,7 @@ spec:
               value: http://test.buerokratt.ee:3000
           volumeMounts:
             - name: dsl
-              mountPath: /DSL
+              mountPath: /byk-ruuter-priv-v1/configurations/
             - name: urls-env
               mountPath: /usr/local/tomcat/urls.env.json
               subPath: private.urls.docker.json

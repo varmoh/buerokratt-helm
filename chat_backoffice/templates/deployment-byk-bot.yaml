@@ -21,7 +21,7 @@ spec:
               name: http
           volumeMounts:
             - name: loba
-              mountPath: /app
+              mountPath: /byk-chatbot/app/models/
       # TODO: Move to a separate deployment
       initContainers:
         - name: byk-train-bot
@@ -36,7 +36,7 @@ spec:
               apt update && apt install -y git &&
               git clone https://github.com/buerokratt/Installation-Guides/ /tmp/intallation-guides &&
               echo 'downloaded' &&
-              mv /tmp/intallation-guides/default-setup/chatbot-and-training/bot/loba/* /app/ &&
+              mv /tmp/intallation-guides/default-setup/chatbot-and-training/bot/loba/* /byk-chatbot-train/chatbot/ &&
               ls /app/ &&
               echo 'training' &&
               rasa train --fixed-model-name loba-model

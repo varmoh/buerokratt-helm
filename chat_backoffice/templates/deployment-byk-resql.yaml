@@ -19,7 +19,7 @@ spec:
               name: http
           volumeMounts:
             - name: dsl
-              mountPath: /workspace/app/templates/
+              mountPath: /byk-resql/DSL/
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3
