@@ -43,4 +43,3 @@ spec:
       volumes:
         - name: loba
           emptyDir: {}
-        # TODO: mount https://github.com/buerokratt/Installation-Guides/tree/main/default-setup/chatbot-and-training/bot/loba
