@@ -18,8 +18,12 @@ spec:
             - containerPort: 8080
               name: http
           env:
-            - name: ruuter.cors.allowedOrigins
-              value: http://test.buerokratt.ee:3000
+            - name: LOG_LEVEL_INFO
+              value: WARN
+            - name: LOG_LEVEL_TIMING
+              value: INFO
+            - name: PORT
+              value: "8080"
           volumeMounts:
             - name: dsl
               mountPath: /byk-ruuter-priv-v1/configurations/

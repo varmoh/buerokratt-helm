@@ -17,3 +17,10 @@ spec:
           ports:
             - containerPort: 3001
               name: http
+          env:
+            - name: REACT_APP_RUUTER_API_URL
+              value: "http://byk-ruuter:8080"
+            - name: REACT_APP_RUUTER_V1_PRIVATE_API_URL
+              value: "http://byk-ruuter-private-v1:8080"
+            - name: REACT_APP_RUUTER_V2_PRIVATE_API_URL
+              value: "http://byk-ruuter-private:8080"

@@ -22,6 +22,8 @@ spec:
               value: WARN
             - name: LOG_LEVEL_TIMING
               value: INFO
+            - name: PORT
+              value: "8080"
           volumeMounts:
             - name: dsl
               mountPath: /byk-ruuter-pub-v1/configurations/
