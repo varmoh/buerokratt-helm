@@ -15,7 +15,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-domain: byk.buerokratt.ee
+domain: byk.buerokratt.example.com # byk.buerokratt.ee
 
 ingress:
   certIssuerName: letsencrypt-prod-issuer
@@ -36,7 +36,7 @@ byk:
   dmapper:
     dsl:
       repo: https://github.com/buerokratt/Training-Module.git
-      path: DSL/DMapper
+      path: DSL/DataMapper
   liquibase:
     dsl:
       repo: https://github.com/buerokratt/Buerokratt-Chatbot.git

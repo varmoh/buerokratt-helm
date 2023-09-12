@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: priv-ruuter
+  name: byk-ruuter-private
 spec:
   selector:
     matchLabels:
-      app: priv-ruuter
+      app: byk-ruuter-private
   template:
     metadata:
       labels:
-        app: priv-ruuter
+        app: byk-ruuter-private
     spec:
       containers:
-        - name: priv-ruuter
+        - name: byk-ruuter-private
           image: ghcr.io/buerokratt/ruuter:beta-2.0.0
           ports:
             - containerPort: 8080

@@ -1,22 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ruuter
+  name: byk-ruuter
 spec:
   selector:
     matchLabels:
-      app: ruuter
+      app: byk-ruuter
   template:
     metadata:
       labels:
-        app: ruuter
+        app: byk-ruuter
     spec:
       containers:
-        - name: ruuter
+        - name: byk-ruuter
           image: ghcr.io/buerokratt/ruuter:beta-2.0.0
           ports:
             - containerPort: 8080
               name: http
+          env:
+            - name: LOG_LEVEL_INFO
+              value: WARN
+            - name: LOG_LEVEL_TIMING
+              value: INFO
           volumeMounts:
             - name: dsl
               mountPath: /byk-ruuter-pub/DSL/
