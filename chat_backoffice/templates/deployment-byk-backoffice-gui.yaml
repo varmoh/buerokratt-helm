@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-backoffice-gui
-          image: "ghcr.io/buerokratt/buerokratt-chatbot:beta-1.0.0"
+          image: "ghcr.io/buerokratt/buerokratt-chatbot:pre_alpha-1.1.1"
           ports:
             - containerPort: 3001
               name: http
@@ -24,3 +24,15 @@ spec:
               value: "http://byk-ruuter-private-v1:8080"
             - name: REACT_APP_RUUTER_V2_PRIVATE_API_URL
               value: "http://byk-ruuter-private:8080"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 10
+            periodSeconds: 10

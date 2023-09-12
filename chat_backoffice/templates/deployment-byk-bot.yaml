@@ -22,6 +22,18 @@ spec:
           volumeMounts:
             - name: loba
               mountPath: /byk-chatbot/app/models/
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5005
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5005
+            initialDelaySeconds: 10
+            periodSeconds: 10
       # TODO: Move to a separate deployment
       initContainers:
         - name: byk-train-bot

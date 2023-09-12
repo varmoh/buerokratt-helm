@@ -28,6 +28,16 @@ spec:
             - name: urls-env
               mountPath: /usr/local/tomcat/urls.env.json
               subPath: public.urls.docker.json
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: bot-action-server
-          image: riaee/byk:bot-action-server-20220728
+          image: rasa/rasa-sdk:3.6.2
           args:
             - "start"
             - "--actions"

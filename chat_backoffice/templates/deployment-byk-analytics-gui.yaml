@@ -17,3 +17,24 @@ spec:
           ports:
             - containerPort: 3001
               name: http
+          env:
+            - name: REACT_APP_API_URL
+              value: http://byk-ruuter:8080
+            - name: REACT_APP_BUEROKRATT_CHATBOT_URL
+              value: http://byk-bot:5005
+            - name: REACT_APP_OPENSEARCH_DASHBOARD_URL
+              value: https://opensearch.org/ # TODO: replace
+            - name: REACT_APP_OPENDATAPORT_URL
+              value: https://avaandmed.eesti.ee # TODO: replace
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 10
+            periodSeconds: 10

@@ -40,6 +40,18 @@ spec:
             - name: application-properties
               mountPath: /workspace/app/src/main/resources/application.properties
               subPath: application.properties
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8085
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8085
+            initialDelaySeconds: 10
+            periodSeconds: 10
       volumes:
         - name: tomcat-config
           configMap:

@@ -15,7 +15,7 @@ spec:
         - name: byk-widget
           image: ghcr.io/buerokratt/chat-widget:beta-1.0.1
           ports:
-            - containerPort: 443
+            - containerPort: 80
               name: http
           volumeMounts:
             - name: dsl
@@ -24,6 +24,18 @@ spec:
             - name: widget-config
               mountPath: /etc/nginx/conf.d/default.conf
               subPath: nginx.conf
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3

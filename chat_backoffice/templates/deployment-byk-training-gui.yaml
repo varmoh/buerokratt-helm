@@ -17,3 +17,18 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          env:
+            - name: REACT_APP_API_BASEURL
+              value: "http://byk-ruuter:8080"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10

@@ -20,6 +20,18 @@ spec:
           volumeMounts:
             - name: dsl
               mountPath: /byk-resql/DSL/
+          livenessProbe:
+            httpGet:
+              path: /datasources
+              port: 8082
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /datasources
+              port: 8082
+            initialDelaySeconds: 70
+            periodSeconds: 10
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3

@@ -15,5 +15,5 @@ spec:
         - name: byk-anonymizer-gui
           image: "ghcr.io/buerokratt/data-anonymizer:beta-1.0.0"
           ports:
-            - containerPort: 80 # TODO: use the correct one
+            - containerPort: 8002 # TODO: use the correct one
               name: http
