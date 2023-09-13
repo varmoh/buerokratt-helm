@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-ruuter-v1
-          image: ghcr.io/buerokratt/ruuter-1.0:beta-1.1.0
+          image: ghcr.io/buerokratt/ruuter-1.0:beta-1.1.1
           ports:
             - containerPort: 8080
               name: http
@@ -34,13 +34,13 @@ spec:
             httpGet:
               path: /rest/test
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 40
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /rest/test
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 50
             periodSeconds: 10
       initContainers:
         - name: dsl-installer
