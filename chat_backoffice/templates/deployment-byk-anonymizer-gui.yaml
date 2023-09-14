@@ -17,3 +17,15 @@ spec:
           ports:
             - containerPort: 8002 # TODO: use the correct one
               name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8002
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8002
+            initialDelaySeconds: 60
+            periodSeconds: 10
