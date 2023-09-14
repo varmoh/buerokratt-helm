@@ -67,8 +67,8 @@ byk:
       jwtIntegration:
         signature:
           issuer: byk.buerokratt.ee
-          keyStorePassword: safe_keystore_password
-          keyStore: file:/usr/local/tomcat/jwtkeystore.jks
+          keyStorePassword: ppjjpp
+          keyStore: classpath:jwtkeystore.jks
       spring:
         profiles:
           active: dev

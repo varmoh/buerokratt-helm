@@ -4,26 +4,26 @@ metadata:
   name: byk-tim-config
 data:
   application.properties: |
-    security.oauth2.client.client-id={{ .Values.byk.tim.env.security.oauth2.client.clientId | quote }}
-    security.oauth2.client.client-secret="${OAUTH2_CLIENT_SECRET}"
-    security.oauth2.client.scope={{ .Values.byk.tim.env.security.oauth2.client.scope | quote }}
+    security.oauth2.client.client-id={{ .Values.byk.tim.env.security.oauth2.client.clientId }}
+    security.oauth2.client.client-secret=${OAUTH2_CLIENT_SECRET}
+    security.oauth2.client.scope={{ .Values.byk.tim.env.security.oauth2.client.scope }}
     security.oauth2.client.registered-redirect-uri=https://tim.{{ .Values.domain }}/authenticate
-    security.oauth2.client.user-authorization-uri={{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri | quote }}
-    security.oauth2.client.access-token-uri={{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri | quote }}
-    security.oauth2.resource.jwk.key-set-uri={{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri | quote }}
-    security.allowlist.jwt={{ .Values.byk.tim.env.security.allowlist.jwt | quote }}
+    security.oauth2.client.user-authorization-uri={{ .Values.byk.tim.env.security.oauth2.client.userAuthorizationUri }}
+    security.oauth2.client.access-token-uri={{ .Values.byk.tim.env.security.oauth2.client.accessTokenUri }}
+    security.oauth2.resource.jwk.key-set-uri={{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri }}
+    security.allowlist.jwt={{ .Values.byk.tim.env.security.allowlist.jwt }}
 
     frontpage.redirect.url=https://admin.{{ .Values.domain }}
 
-    logging.level.root={{ .Values.byk.tim.env.logging.level.root | quote }}
+    logging.level.root={{ .Values.byk.tim.env.logging.level.root }}
     {{ $dbName := index .Values "tim-postgresql" "auth" "database" }}
-    spring.datasource.url="jdbc:postgresql://{{ .Release.Name }}-tim-postgresql:5432/{{ $dbName }}"
-    spring.datasource.username={{ index .Values "tim-postgresql" "auth" "username" | quote }}
-    spring.datasource.password="${DB_PASSWORD}"
+    spring.datasource.url=jdbc:postgresql://{{ .Release.Name }}-tim-postgresql:5432/{{ $dbName }}
+    spring.datasource.username={{ index .Values "tim-postgresql" "auth" "username" }}
+    spring.datasource.password=${DB_PASSWORD}
     spring.datasource.driver-class-name=org.postgresql.Driver
     spring.liquibase.change-log=classpath:master.xml
 
-    spring.profiles.active={{ .Values.byk.tim.env.spring.profiles.active | quote }}
+    spring.profiles.active={{ .Values.byk.tim.env.spring.profiles.active }}
 
     #legacy integration properties
 
@@ -31,7 +31,7 @@ data:
     #how long the legacy session will last
     legacy-portal-integration.sessionCookieName=PHPSESSID
     # this should match the legacy cookie domain name
-    legacy-portal-integration.sessionCookieDomain={{ .Values.byk.tim.env.legacyPortalIntegration.sessionCookieDomain | quote }}
+    legacy-portal-integration.sessionCookieDomain={{ .Values.byk.tim.env.legacyPortalIntegration.sessionCookieDomain }}
     #is TARA auth module deployed on the same domain as legacy portal?
     # should be set to false only in development mode
     legacy-portal-integration.taraAuthDeployedOnLegacyDomain=true
@@ -43,9 +43,9 @@ data:
     legacy-portal-integration.redirectUrlAttribute=url_redirect
     # Marker to determine if the user should be redirected back to legacy portal or not
     # Marker is searched in the Referer HTTP header
-    legacy-portal-integration.legacyPortalRefererMarker={{ .Values.byk.tim.env.legacyPortalIntegration.legacyPortalRefererMarker | quote }}
+    legacy-portal-integration.legacyPortalRefererMarker={{ .Values.byk.tim.env.legacyPortalIntegration.legacyPortalRefererMarker }}
     # Location of legacy portal to redirect to, in case legacyPortalRefererMarker gives a positive match
-    legacy-portal-integration.legacyUrl="{{ .Values.byk.tim.env.legacyPortalIntegration.legacyUrl | quote }}"
+    legacy-portal-integration.legacyUrl={{ .Values.byk.tim.env.legacyPortalIntegration.legacyUrl }}
 
     # JWT configuration properties
     # location of the private key that will be used for signing JWT tokens
@@ -54,12 +54,12 @@ data:
     # to generate the key and the keystore use:
     # keytool -genkeypair -keyalg rsa -keysize 2048 -alias jwtsign -keystore jwtkeystore.jks
     # NB! password for both keystore and alias should be the same
-    jwt-integration.signature.key-store={{ .Values.byk.tim.env.jwtIntegration.signature.keyStore | quote }}
+    jwt-integration.signature.key-store={{ .Values.byk.tim.env.jwtIntegration.signature.keyStore }}
     jwt-integration.signature.key-store-password=${KEY_STORE_PASSWORD}
     jwt-integration.signature.keyStoreType=JKS
     jwt-integration.signature.keyAlias=jwtsign
     #Jwt issuer property
-    jwt-integration.signature.issuer={{ .Values.byk.tim.env.jwtIntegration.signature.issuer | quote }}
+    jwt-integration.signature.issuer={{ .Values.byk.tim.env.jwtIntegration.signature.issuer }}
     #Jwt cookie name property
     jwt-integration.signature.cookieName=JWTTOKEN
 

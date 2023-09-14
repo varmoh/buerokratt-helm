@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-anonymizer-gui
-          image: "ghcr.io/buerokratt/data-anonymizer:beta-1.0.0"
+          image: "ghcr.io/buerokratt/data-anonymizer:pre-alpha-1.0.1-anonymise"
           ports:
             - containerPort: 8002 # TODO: use the correct one
               name: http
