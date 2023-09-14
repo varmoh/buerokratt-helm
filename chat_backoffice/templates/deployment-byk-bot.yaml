@@ -35,6 +35,8 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 10
       # TODO: Move to a separate deployment
+      # The current implemenation doesn't work due to lack of sudo
+      # This will be fixed in a separate task
       initContainers:
         - name: byk-train-bot
           image: "rasa/rasa:3.0.13"

@@ -13,19 +13,19 @@ spec:
     spec:
       containers:
         - name: byk-anonymizer-gui
-          image: "ghcr.io/buerokratt/data-anonymizer:pre-alpha-1.0.1-anonymise"
+          image: "ghcr.io/buerokratt/data-anonymizer:PRE-ALPHA-1.1.1-Datamanagement"
           ports:
-            - containerPort: 8002 # TODO: use the correct one
+            - containerPort: 8002
               name: http
           livenessProbe:
             httpGet:
               path: /
               port: 8002
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: 8002
-            initialDelaySeconds: 60
+            initialDelaySeconds: 40
             periodSeconds: 10
