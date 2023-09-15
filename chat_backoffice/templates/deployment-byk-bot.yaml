@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-bot
-          image: "riaee/byk:bot-20220728"
+          image: "rasa/rasa:3.0.13"
           args:
             - "run"
           ports:
@@ -21,10 +21,25 @@ spec:
               name: http
           volumeMounts:
             - name: loba
-              mountPath: /app
+              mountPath: /byk-chatbot/app/models/
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5005
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5005
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      # TODO: Move to a separate deployment
+      # The current implemenation doesn't work due to lack of sudo
+      # This will be fixed in a separate task
       initContainers:
         - name: byk-train-bot
-          image: "riaee/byk:bot-20220728"
+          image: "rasa/rasa:3.0.13"
           volumeMounts:
             - name: loba
               mountPath: /app
@@ -35,11 +50,10 @@ spec:
               apt update && apt install -y git &&
               git clone https://github.com/buerokratt/Installation-Guides/ /tmp/intallation-guides &&
               echo 'downloaded' &&
-              mv /tmp/intallation-guides/default-setup/chatbot-and-training/bot/loba/* /app/ &&
+              mv /tmp/intallation-guides/default-setup/chatbot-and-training/bot/loba/* /byk-chatbot-train/chatbot/ &&
               ls /app/ &&
               echo 'training' &&
               rasa train --fixed-model-name loba-model
       volumes:
         - name: loba
           emptyDir: {}
-        # TODO: mount https://github.com/buerokratt/Installation-Guides/tree/main/default-setup/chatbot-and-training/bot/loba

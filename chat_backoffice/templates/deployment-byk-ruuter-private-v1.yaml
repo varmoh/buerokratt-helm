@@ -1,40 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: byk-ruuter-private
+  name: byk-ruuter-private-v1
 spec:
   selector:
     matchLabels:
-      app: byk-ruuter-private
+      app: byk-ruuter-private-v1
   template:
     metadata:
       labels:
-        app: byk-ruuter-private
+        app: byk-ruuter-private-v1
     spec:
       containers:
-        - name: byk-ruuter-private
-          image: ghcr.io/buerokratt/ruuter:beta-2.0.0
+        - name: byk-ruuter-private-v1
+          image: ghcr.io/buerokratt/ruuter-1.0:beta-1.1.1
           ports:
             - containerPort: 8080
               name: http
           env:
-            - name: ruuter.cors.allowedOrigins
-              value: http://test.buerokratt.ee:3000
+            - name: LOG_LEVEL_INFO
+              value: WARN
+            - name: LOG_LEVEL_TIMING
+              value: INFO
+            - name: PORT
+              value: "8080"
           volumeMounts:
             - name: dsl
-              mountPath: /byk-ruuter-priv/DSL/
+              mountPath: /byk-ruuter-priv-v1/configurations/
             - name: urls-env
               mountPath: /usr/local/tomcat/urls.env.json
               subPath: private.urls.docker.json
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 40
             periodSeconds: 10
           readinessProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 40
             periodSeconds: 10
       initContainers:
         - name: dsl-installer

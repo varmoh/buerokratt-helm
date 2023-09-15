@@ -13,13 +13,25 @@ spec:
     spec:
       containers:
         - name: byk-dmapper
-          image: ghcr.io/varmoh/datamapper:9e0675c4c57e12e3c7688d383e7f95390c3464e5
+          image: ghcr.io/buerokratt/datamapper:prod-2.0.0
           ports:
             - containerPort: 3000
               name: http
           volumeMounts:
             - name: dsl
               mountPath: /workspace/app/views/byk/
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
       initContainers:
         - name: dsl-installer
           image: alpine/git:2.36.3

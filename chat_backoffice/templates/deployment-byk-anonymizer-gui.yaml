@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-anonymizer-gui
+spec:
+  selector:
+    matchLabels:
+      app: byk-anonymizer-gui
+  template:
+    metadata:
+      labels:
+        app: byk-anonymizer-gui
+    spec:
+      containers:
+        - name: byk-anonymizer-gui
+          image: "ghcr.io/buerokratt/data-anonymizer:PRE-ALPHA-1.1.1-Datamanagement"
+          ports:
+            - containerPort: 8002
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8002
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8002
+            initialDelaySeconds: 40
+            periodSeconds: 10

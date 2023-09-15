@@ -13,9 +13,9 @@ spec:
     spec:
       containers:
         - name: "byk-tim"
-          image: "riaee/byk-tim:07"
+          image: "ghcr.io/buerokratt/tim:prod-2.0.0"
           ports:
-            - containerPort: 8080
+            - containerPort: 8085
               name: "http"
           env:
             - name: "DB_PASSWORD"
@@ -40,6 +40,18 @@ spec:
             - name: application-properties
               mountPath: /workspace/app/src/main/resources/application.properties
               subPath: application.properties
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8085
+            initialDelaySeconds: 50
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8085
+            initialDelaySeconds: 60
+            periodSeconds: 10
       volumes:
         - name: tomcat-config
           configMap:

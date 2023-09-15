@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-services-gui
+spec:
+  selector:
+    matchLabels:
+      app: byk-services-gui
+  template:
+    metadata:
+      labels:
+        app: byk-services-gui
+    spec:
+      containers:
+        - name: byk-services-gui
+          image: "ghcr.io/buerokratt/service-module:beta-1.0.0"
+          ports:
+            - containerPort: 3001
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 10
+            periodSeconds: 10
