@@ -24,7 +24,7 @@ spec:
               value: INFO
           volumeMounts:
             - name: dsl
-              mountPath: /byk-ruuter-pub/DSL/
+              mountPath: {{ .Values.byk.ruuter.dsl.path }}
             - name: urls-env
               mountPath: /usr/local/tomcat/urls.env.json
               subPath: public.urls.docker.json
@@ -40,23 +40,15 @@ spec:
             periodSeconds: 10
       initContainers:
         - name: dsl-installer
-          image: alpine/git:2.36.3
+          image: {{ .Values.byk.dsl.image.registry }}/{{ .Values.byk.dsl.image.repository }}:{{ .Values.byk.dsl.image.tag }}
           volumeMounts:
             - name: dsl
-              mountPath: /root/DSL
+              mountPath: /root/DSL/
           command: ["/bin/sh"]
           args:
             - "-c"
             - >
-              git clone $DSL_REPO /tmp/dsl-source &&
-              echo 'downloaded' &&
-              mv /tmp/dsl-source/$DSL_PATH/* /root/DSL/ &&
-              echo 'moved'
-          env:
-            - name: DSL_REPO
-              value: {{ .Values.byk.ruuter.dsl.repo }}
-            - name: DSL_PATH
-              value: {{ .Values.byk.ruuter.dsl.path }}
+              ls -l /Ruuter/public/v2/ && mv /Ruuter/public/v2/* /root/DSL/ && echo 'moved'
       volumes:
         - name: dsl
           emptyDir: {}

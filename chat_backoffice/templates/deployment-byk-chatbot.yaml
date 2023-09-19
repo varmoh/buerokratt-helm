@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: byk-chatbot
+spec:
+  selector:
+    matchLabels:
+      app: byk-chatbot
+  template:
+    metadata:
+      labels:
+        app: byk-chatbot
+    spec:
+      containers:
+        - name: byk-chatbot
+          image: "rasa/rasa:3.0.13"
+          args:
+            - "run"
+          ports:
+            - containerPort: 5005
+              name: http
+          volumeMounts:
+            - name: loba
+              mountPath: /app/models/
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5005
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5005
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      # TODO: Move to a separate deployment
+      initContainers:
+        - name: byk-training-data-loader
+          image: "ghcr.io/buerokratt/buerokratt-dsl:pre-alpha-1.0.23"
+          volumeMounts:
+            - name: training-data
+              mountPath: /root/DSL
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              ls -l /bot/loba/ && mv /bot/loba/* /root/DSL && echo 'moved'
+        - name: byk-train-bot
+          image: "rasa/rasa:3.0.13"
+          volumeMounts:
+            - name: loba
+              mountPath: /byk-chatbot-train/result/
+            - name: training-data
+              mountPath: /byk-chatbot-train/chatbot/
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              echo 'waiting for trainting data' &&
+              sleep 10 &&
+              echo 'checking training data' &&
+              ls -l /byk-chatbot-train/chatbot/ &&
+              mkdir -p /tmp/chatbot &&
+              cp -r /byk-chatbot-train/chatbot/* /tmp/chatbot &&
+              echo 'training' &&
+              cd /tmp/chatbot &&
+              rasa train --fixed-model-name loba-model &&
+              mv /tmp/chatbot/models/loba-model.tar.gz /byk-chatbot-train/result/
+      volumes:
+        - name: loba
+          emptyDir: {}
+        - name: training-data
+          emptyDir: {}

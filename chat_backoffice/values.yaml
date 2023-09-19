@@ -21,22 +21,26 @@ ingress:
   certIssuerName: letsencrypt-prod-issuer
 
 byk:
+  dsl:
+    image:
+      registry: "ghcr.io"
+      repository: "buerokratt/buerokratt-dsl"
+      tag: "pre-alpha-1.0.22"
   ruuter:
     dsl:
-      repo: https://github.com/buerokratt/Ruuter.git
-      path: DSL
+      path: "/byk-ruuter-pub/DSL/"
+  ruuterV1:
+    dsl:
+      path: "/byk-ruuter-pub-v1/configurations/"
   ruuterPrivate:
     dsl:
-      repo: https://github.com/buerokratt/Training-Module.git
-      path: DSL/Ruuter.private
+      path: "/byk-ruuter-priv/DSL/"
+  ruuterPrivateV1:
+    dsl:
+      path: "/byk-ruuter-priv-v1/configurations/"
   resql:
     dsl:
-      repo: https://github.com/buerokratt/Training-Module.git
-      path: DSL/Resql
-  dmapper:
-    dsl:
-      repo: https://github.com/buerokratt/Training-Module.git
-      path: DSL/DataMapper
+      path: "/byk-resql/DSL/"
   liquibase:
     dsl:
       repo: https://github.com/buerokratt/Buerokratt-Chatbot.git

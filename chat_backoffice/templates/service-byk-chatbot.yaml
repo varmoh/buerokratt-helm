@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bot-action-server
+  name: byk-chatbot
 spec:
   selector:
-    app: bot-action-server
+    app: byk-chatbot
   ports:
-    - port: 5055
+    - port: 5005
       targetPort: http
       protocol: TCP
       name: http
