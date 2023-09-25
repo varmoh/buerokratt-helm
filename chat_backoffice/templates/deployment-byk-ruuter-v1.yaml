@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: byk-ruuter-v1
+  labels:
+    app: byk-ruuter-v1
 spec:
   selector:
     matchLabels:

@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: byk-ruuter-v1
+spec:
+  host: byk-ruuter-v1
+  subsets:
+  - name: byk-ruuter-v1
+    labels:
+      app: byk-ruuter-v1
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: byk-ruuter-v1
+spec:
+  hosts:
+  - byk-ruuter-v1
+  http:
+  - name: allow
+    match:
+    - sourceLabels:
+        app: byk-ruuter
+    route:
+    - destination:
+        host: byk-ruuter-v1
+        subset: byk-ruuter-v1
+  - name: reject
+    route:
+    - destination:
+        host: byk-ruuter-v1
+        subset: byk-ruuter-v1
+    fault:
+      abort:
+        percentage:
+          value: 100.0
+        httpStatus: 403
+
