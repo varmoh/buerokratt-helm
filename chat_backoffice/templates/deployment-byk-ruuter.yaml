@@ -28,6 +28,9 @@ spec:
             - name: urls-env
               mountPath: /usr/local/tomcat/urls.env.json
               subPath: public.urls.docker.json
+            - name: byk-dsl-services
+              mountPath: "/opt/dsl"
+              readOnly: true
           livenessProbe:
             tcpSocket:
               port: 8080
@@ -55,3 +58,6 @@ spec:
         - name: urls-env
           configMap:
             name: urls-env-config
+        - name: byk-dsl-services
+          persistentVolumeClaim:
+            claimName: byk-dsl-services

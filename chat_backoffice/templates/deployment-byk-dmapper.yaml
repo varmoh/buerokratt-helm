@@ -29,3 +29,15 @@ spec:
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 10
+          volumeMounts:
+            - name: byk-dsl-training
+              mountPath: "/opt/dsl-training"
+            - name: byk-dsl-services
+              mountPath: "/opt/dsl-services"
+      volumes:
+        - name: byk-dsl-training
+          persistentVolumeClaim:
+            claimName: byk-dsl-training
+        - name: byk-dsl-services
+          persistentVolumeClaim:
+            claimName: byk-dsl-services
