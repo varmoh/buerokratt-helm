@@ -20,7 +20,7 @@ spec:
           service:
             name: byk-widget
             port:
-              number: 8443
+              number: 443
   tls:
   - hosts:
     - {{ .Values.domain }}
