@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-widget
-          image: ghcr.io/buerokratt/chat-widget:beta-1.0.1
+          image: ghcr.io/buerokratt/chat-widget:pre-alpha-1.2.1
           ports:
             - containerPort: 80
               name: http

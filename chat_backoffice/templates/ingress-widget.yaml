@@ -1,26 +1,27 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ruuter-v1-ingress
+  name: byk-widget-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuerName | quote }}
+    #cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuerName | quote }}
   labels:
-    name: ruuter-ingress
+    name: byk-widget-ingress
 spec:
   rules:
-  - host: ruuter-v1.{{ .Values.domain }}
+  - host: {{ .Values.domain }}
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: byk-ruuter-v1
+            name: byk-widget
             port:
-              number: 8080
+              number: 443
   tls:
   - hosts:
-    - ruuter-v1.{{ .Values.domain }}
+    - {{ .Values.domain }}
+    secretName: byk-tls-secret

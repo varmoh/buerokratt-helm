@@ -7,6 +7,6 @@ spec:
     app: byk-tim
   ports:
     - port: 8085
-      targetPort: http
+      targetPort: 8085
       protocol: TCP
       name: http

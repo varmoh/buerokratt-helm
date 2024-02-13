@@ -1,28 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: byk-dmapper
+  name: byk-dmapper-v2
 spec:
   selector:
     matchLabels:
-      app: byk-dmapper
+      app: byk-dmapper-v2
   template:
     metadata:
       labels:
-        app: byk-dmapper
+        app: byk-dmapper-v2
     spec:
       containers:
-        - name: byk-dmapper
+        - name: byk-dmapper-v2
           image: ghcr.io/buerokratt/datamapper:pre-alpha-19-2.2.5
-          env:
-            - name: EXTENSION
-              value: .hbs
           ports:
             - containerPort: 3000
               name: http
           volumeMounts:
             - name: dsl-mount
-              mountPath: {{ .Values.byk.dmapper.dsl.path }}
+              mountPath: {{ .Values.byk.dmapper2.dsl.path }}
             - name: byk-dsl-training
               mountPath: "/opt/dsl-training"
             - name: byk-dsl-services
@@ -49,7 +46,7 @@ spec:
           args:
             - "-c"
             - |
-                ls -l /DataMapper/ && mv /DataMapper/v1/* /root/DSL/ && echo 'moved'
+                ls -l /DataMapper/ && mv /DataMapper/v2/* /root/DSL/ && echo 'moved'
       volumes:
         - name: dsl-mount
           emptyDir: {}

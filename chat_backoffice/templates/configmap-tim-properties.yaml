@@ -13,7 +13,7 @@ data:
     security.oauth2.resource.jwk.key-set-uri={{ .Values.byk.tim.env.security.oauth2.resource.jwk.keySetUri }}
     security.allowlist.jwt={{ .Values.byk.tim.env.security.allowlist.jwt }}
 
-    frontpage.redirect.url=https://admin.{{ .Values.domain }}
+    frontpage.redirect.url=https://admin.{{ .Values.domain }}/chat
 
     logging.level.root={{ .Values.byk.tim.env.logging.level.root }}
     {{ $dbName := index .Values "tim-postgresql" "auth" "database" }}
@@ -69,8 +69,8 @@ data:
     userIPLoggingPrefix = from IP
     userIPLoggingMDCkey = userIP
 
-    headers.contentSecurityPolicy=upgrade-insecure-requests;default-src 'self' 'unsafe-inline' 'unsafe-eval' https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }} byk-tim byk-public-ruuter byk-private-ruuter byk-customer-service;object-src 'self';script-src 'self' 'unsafe-inline' 'unsafe-eval' https://{{ .Values.domain }} https://admin.{{ .Values.domain }} https://tim.{{ .Values.domain }};connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }} https://priv-ruuter.{{ .Values.domain }};frame-src 'self';media-src 'none'
-    cors.allowedOrigins=https://{{ .Values.domain }},https://admin.{{ .Values.domain }},https://ruuter.{{ .Values.domain }},https://priv-ruuter.{{ .Values.domain }}
+    headers.contentSecurityPolicy=upgrade-insecure-requests;default-src 'self' 'unsafe-inline' 'unsafe-eval' https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }}/v2/public/ https://ruuter.{{ .Values.domain }}/v2/private/ byk-tim byk-ruuter byk-ruuter-private byk-backoffice-login;object-src 'self';script-src 'self' 'unsafe-inline' 'unsafe-eval' https://{{ .Values.domain }} https://admin.{{ .Values.domain }} https://tim.{{ .Values.domain }};connect-src 'self' https://{{ .Values.domain }} https://tim.{{ .Values.domain }} https://admin.{{ .Values.domain }} https://ruuter.{{ .Values.domain }}/v2/public/ https://ruuter.{{ .Values.domain }}/v2/private/;frame-src 'self';media-src 'none'
+    cors.allowedOrigins=https://{{ .Values.domain }},https://admin.{{ .Values.domain }},https://ruuter.{{ .Values.domain }}/v2/public/,https://ruuter.{{ .Values.domain }}/v2/private/
     auth.success.redirect.whitelist=https://admin.{{ .Values.domain }}/auth/callback,https://{{ .Values.domain }},https://{{ .Values.domain }}/auth/callback,https://admin.{{ .Values.domain }}
 
     server.port=8085

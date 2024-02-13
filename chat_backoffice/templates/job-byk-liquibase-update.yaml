@@ -28,6 +28,7 @@ spec:
             ls -l /DSL && cd /DSL && liquibase
             --url=jdbc:postgresql://{{ .Release.Name }}-users-db:5432/byk?user=byk
             --password={{ $password }} --changelog-file=master.yml update
+            
         volumeMounts:
           - name: dsl
             mountPath: /DSL

@@ -15,49 +15,53 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-domain: byk.buerokratt.example.com # byk.buerokratt.ee
+domain: test.buerokratt.ee # byk.buerokratt.ee
+
+#ingress:
+#  tlsConfigMapName: byk-tls-configmap
 
 ingress:
   certIssuerName: letsencrypt-prod-issuer
+#  certIssuerName: letsencrypt-staging 
 
 byk:
   dsl:
     image:
       registry: "ghcr.io"
       repository: "buerokratt/buerokratt-dsl"
-      tag: "pre-alpha-1.0.22"
+      tag: "pre-alpha-kube-1.12.33"
   ruuter:
     dsl:
-      path: "/byk-ruuter-pub/DSL/"
-  ruuterV1:
-    dsl:
-      path: "/byk-ruuter-pub-v1/configurations/"
+      path: "/DSL/"
   ruuterPrivate:
     dsl:
-      path: "/byk-ruuter-priv/DSL/"
-  ruuterPrivateV1:
-    dsl:
-      path: "/byk-ruuter-priv-v1/configurations/"
+      path: "/DSL/"
   resql:
     dsl:
-      path: "/byk-resql/DSL/"
+      path: "/DSL/"
+  dmapper:
+    dsl:
+      path: "/workspace/app/module"
+  dmapper2:
+    dsl:
+      path: "/workspace/app/module"
   liquibase:
     dsl:
       repo: https://github.com/buerokratt/Buerokratt-Chatbot.git
-      path: DSL.Liquibase
+      path: DSL/Liquibase
   widget:
     index:
-      repo: https://github.com/buerokratt/Installation-Guides.git
+      repo: https://github.com/varmoh/Installation-Guides.git
       path: default-setup/backoffice-and-bykstack/chat-widget/index.html
   tim:
     env:
       security:
         allowlist:
-          jwt: byk-public-ruuter,byk-private-ruuter,byk-dmapper,byk-widget,byk-customer-service,byk-resql
+          jwt: byk-ruuter,byk-ruuter-private,byk-dmapper,byk-widget,byk-backoffice-login,byk-resql,byk-tim,10.0.0.0/8,192.168.0.0/16
         oauth2:
           client:
-            clientId: tara_client_id
-            clientSecret: tara_client_secret
+            clientId: byk_public_test
+            clientSecret: tI6eiKVjASEnKpGBKWSHI1y63Zv69fvh
             scope: openid
             userAuthorizationUri: https://tara-test.ria.ee/oidc/authorize
             accessTokenUri: https://tara-test.ria.ee/oidc/token
@@ -65,12 +69,12 @@ byk:
             jwk:
               keySetUri: https://tara-test.ria.ee/oidc/jwks
       legacyPortalIntegration:
-        legacyUrl: some.example.com
-        legacyPortalRefererMarker: https://some.example.com/portal
+        legacyUrl: arendus.eesti.ee
+        legacyPortalRefererMarker: https://arendus.eesti.ee/portaal
         sessionCookieDomain: buerokratt.ee
       jwtIntegration:
         signature:
-          issuer: byk.buerokratt.ee
+          issuer: test.buerokratt.ee
           keyStorePassword: ppjjpp
           keyStore: classpath:jwtkeystore.jks
       spring:
@@ -78,7 +82,7 @@ byk:
           active: dev
       logging:
         level:
-          root: INFO
+          root: TRACE
 
 tim-postgresql:
   image:
@@ -97,3 +101,9 @@ users-db:
     username: byk
     password: "01234"
     database: byk
+  statefulset:
+    enabled: true
+    replicaCount: 3
+    persistence:
+      enabled: true
+

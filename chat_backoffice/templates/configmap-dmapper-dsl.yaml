@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dsl-paths-config
+data:
+  paths.yaml: |
+    - /workspace/app/views/chat-bot/
+    - /workspace/app/js/chat-bot/
+    - /workspace/app/lib/
