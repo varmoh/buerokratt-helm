@@ -13,7 +13,7 @@ spec:
     spec:
       initContainers:
       - name: init-keytool
-        image: ghcr.io/buerokratt/tim:pre-apha-2.3.1
+        image: {{ .Values.images.tim.registry }}/{{ .Values.images.tim.repository }}:{{ .Values.images.tim.tag }}
         command: 
           - 'sh'
           - '-c'
@@ -33,8 +33,8 @@ spec:
           mountPath: /workspace/app-shared
 
       containers:
-      - name: "byk-tim"
-        image: "ghcr.io/buerokratt/tim:pre-apha-2.3.1"
+      - name: byk-tim
+        image: {{ .Values.images.tim.registry }}/{{ .Values.images.tim.repository }}:{{ .Values.images.tim.tag }}
         ports:
         - containerPort: 8085
           name: "http"

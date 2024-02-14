@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-ruuter
-          image: ghcr.io/buerokratt/ruuter:pre-alpha-2.3.14-237
+          image: {{ .Values.images.ruuter.registry }}/{{ .Values.images.ruuter.repository }}:{{ .Values.images.ruuter.tag }}
           ports:
             - containerPort: 8080
               name: http

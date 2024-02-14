@@ -107,3 +107,20 @@ users-db:
     persistence:
       enabled: true
 
+images:
+  tim:
+    registry: "ghcr.io"
+    repository: "buerokratt/tim"
+    tag: "pre-apha-2.4.2"
+  ruuter:
+    registry: "ghcr.io"
+    repository: "buerokratt/Ruuter"
+    tag: "pre-alpha-2.4.1" 
+  dmapper:
+    registry: "ghcr.io"
+    repository: "buerokratt/datamapper"
+    tag: "pre-alpha-2.3.1"
+  resql:
+    registry: "ghcr.io"
+    repository: "buerokratt/resql"
+    tag: "re-alpha-2.4.0-27"

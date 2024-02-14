@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-dmapper
-          image: ghcr.io/buerokratt/datamapper:pre-alpha-19-2.2.5
+          image: {{ .Values.images.dmapper.registry }}/{{ .Values.images.dmapper.repository }}:{{ .Values.images.dmapper.tag }}
           env:
             - name: EXTENSION
               value: .hbs
