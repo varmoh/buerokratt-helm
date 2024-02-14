@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'chart_backoffice/Chart.yaml'
+      - 'chat_backoffice/Chart.yaml'
 
 jobs:
   deploy:

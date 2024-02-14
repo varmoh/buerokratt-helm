@@ -13,22 +13,52 @@ spec:
     spec:
       containers:
         - name: byk-training-gui
-          image: "ghcr.io/buerokratt/training-module:beta-1.0.0"
+          image: "ghcr.io/varmoh/training-module:pre-alpha-varmo-1.13.18"
           ports:
-            - containerPort: 80
+            - containerPort: 3001
               name: http
           env:
+            - name: REACT_APP_RUUTER_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v2/public/backoffice"
+            - name: REACT_APP_RUUTER_V1_PRIVATE_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v1/private/"
+            - name: REACT_APP_RUUTER_V2_PRIVATE_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v2/private/backoffice"
+            - name: REACT_APP_MENU_URL
+              value: "https://admin.test.buerokratt.ee"
+            - name:  REACT_APP_MENU_PATH
+              value: "/chat/menu.json"
+            - name: REACT_APP_CUSTOMER_SERVICE_LOGIN
+              value: "http://admin.test.buerokratt.ee/et/dev-auth"
+            - name: REACT_APP_CONVERSATIONS_BASE_URL
+              value: "https://admin.test.buerokratt.ee/chat"
+            - name: REACT_APP_TRAINING_BASE_URL
+              value: "https://admin.test.buerokratt.ee/training"
+            - name: REACT_APP_ANALYTICS_BASE_URL
+              value: "https://admin.test.buerokratt.ee/analytics"
+            - name: REACT_APP_SERVICES_BASE_URL
+              value: "https://admin.test.buerokratt.ee/services"
+            - name: REACT_APP_SETTINGS_BASE_URL
+              value: "https://admin.test.buerokratt.ee/settings"
+            - name: REACT_APP_MONITORING_BASE_URL
+              value: "https://admin.test.buerokratt.ee/monitoring"
+            - name: REACT_APP_SERVICE_ID
+              value: "training"
             - name: REACT_APP_API_BASEURL
-              value: "http://byk-ruuter:8080"
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 20
-            periodSeconds: 10
+              value: "http://ruuter.test.buerokratt.ee/v2/private"
+            - name: REACT_APP_RUUTER_URL
+              value: "https://ruuter.test.buerokratt.ee/v2/public"
+            - name: REACT_APP_API_URL
+              value: "https://admin.test.buerokratt.ee/training"
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: 80
+#            initialDelaySeconds: 10
+#            periodSeconds: 10
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: 80
+#            initialDelaySeconds: 20
+#            periodSeconds: 10

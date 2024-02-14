@@ -15,17 +15,17 @@ spec:
         - name: byk-anonymizer-gui
           image: "ghcr.io/buerokratt/data-anonymizer:PRE-ALPHA-1.1.1-Datamanagement"
           ports:
-            - containerPort: 8002
+            - containerPort: 3004
               name: http
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8002
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8002
-            initialDelaySeconds: 40
-            periodSeconds: 10
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: 3004
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: 3004
+#            initialDelaySeconds: 40
+#            periodSeconds: 10

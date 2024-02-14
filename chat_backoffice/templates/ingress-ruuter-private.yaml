@@ -5,17 +5,27 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/enable-cors: "true"
+#    nginx.ingress.kubernetes.io/cors-allow-methods: "POST, GET, OPTIONS"
+#    nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://admin.test.buerokratt.ee, https://test.buerokratt.ee, https://tim.test.buerokratt.ee, https://admin.dev.buerokratt.ee, https://ruuter.test.buerokratt.ee/, https://ruuter.test.buerokratt.ee/v1/private/"
+#    nginx.ingress.kubernetes.io/session-cookie-domain: "buerokratt.ee"
+#    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+#    nginx.ingress.kubernetes.io/additional-response-headers: "Access-Control-Allow-Headers: Content-Type"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "content-type"
+ #   nginx.ingress.kubernetes.io/proxy-set-header: "Content-Type: application/json"
+    nginx.ingress.kubernetes.io/cors-expose-headers: "X-B3-TraceId"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuerName | quote }}
+    #cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuerName | quote }}
   labels:
     name: ruuter-private-ingress
 spec:
   rules:
-  - host: priv-ruuter.{{ .Values.domain }}
+  - host: ruuter.{{ .Values.domain }}
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/v2/private/(.*)"
         backend:
           service:
             name: byk-ruuter-private
@@ -23,4 +33,5 @@ spec:
               number: 8080
   tls:
   - hosts:
-    - priv-ruuter.{{ .Values.domain }}
+    - ruuter.{{ .Values.domain }}
+    secretName: byk-tls-ruuter-secret 

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: byk-ruuter-v1
+  name: byk-dmapper-v2
 spec:
   selector:
-    app: byk-ruuter-v1
+    app: byk-dmapper-v2
   ports:
-    - port: 8080
+    - port: 3000
       targetPort: http
       protocol: TCP
       name: http

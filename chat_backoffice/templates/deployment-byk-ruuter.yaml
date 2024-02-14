@@ -13,21 +13,25 @@ spec:
     spec:
       containers:
         - name: byk-ruuter
-          image: ghcr.io/buerokratt/ruuter:beta-2.0.0
+          image: {{ .Values.images.ruuter.registry }}/{{ .Values.images.ruuter.repository }}:{{ .Values.images.ruuter.tag }}
           ports:
             - containerPort: 8080
               name: http
           env:
-            - name: LOG_LEVEL_INFO
-              value: WARN
-            - name: LOG_LEVEL_TIMING
+            - name: logging.level.root
               value: INFO
+            - name: LOG_LEVEL_TIMING
+              value: DEBUG
+            - name: application.logging.displayRequestContent
+              value: "true"
+            - name: application.logging.displayResponseContent
+              value: "true"
           volumeMounts:
             - name: dsl
               mountPath: {{ .Values.byk.ruuter.dsl.path }}
             - name: urls-env
-              mountPath: /usr/local/tomcat/urls.env.json
-              subPath: public.urls.docker.json
+              mountPath: /app/constants.ini
+              subPath: constants.ini
             - name: byk-dsl-services
               mountPath: "/opt/dsl"
               readOnly: true

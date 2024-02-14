@@ -13,27 +13,56 @@ spec:
     spec:
       containers:
         - name: byk-services-gui
-          image: "ghcr.io/buerokratt/service-module:beta-1.0.0"
+          image: "ghcr.io/buerokratt/service-module:pre-alpha-1.2.0"
           ports:
-            - containerPort: 3001
+            - containerPort: 3006
               name: http
+          env:
+            - name: REACT_APP_RUUTER_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v2/public/services"
+            - name: REACT_APP_RUUTER_V1_PRIVATE_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v1/private"
+            - name: REACT_APP_RUUTER_V2_PRIVATE_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v2/private/services"
+            - name: REACT_APP_MENU_URL
+              value: "https://admin.test.buerokratt.ee"
+            - name:  REACT_APP_MENU_PATH
+              value: "/chat/menu.json"
+            - name: REACT_APP_CUSTOMER_SERVICE_LOGIN
+              value: "http://admin.test.buerokratt.ee/et/dev-auth"
+            - name: REACT_APP_CONVERSATIONS_BASE_URL
+              value: "https://admin.test.buerokratt.ee/chat"
+            - name: REACT_APP_TRAINING_BASE_URL
+              value: "https://admin.test.buerokratt.ee/training"
+            - name: REACT_APP_ANALYTICS_BASE_URL
+              value: "https://admin.test.buerokratt.ee/analytics"
+            - name: REACT_APP_SERVICES_BASE_URL
+              value: "https://admin.test.buerokratt.ee/services"
+            - name: REACT_APP_SETTINGS_BASE_URL
+              value: "https://admin.test.buerokratt.ee/settings"
+            - name: REACT_APP_MONITORING_BASE_URL
+              value: "https://admin.test.buerokratt.ee/monitoring"
+            - name: REACT_APP_SERVICE_ID
+              value: "services"
+            - name: REACT_APP_API_BASEURL
+              value: "http://byk-ruuter:8080"
           volumeMounts:
             - name: dsl
-              mountPath: {{ .Values.byk.ruuter.dsl.path }}
+              mountPath: {{ .Values.byk.ruuter.dsl.path }}/public
               subPath: public/
             - name: dsl
-              mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}
+              mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}/private
               subPath: private/
           livenessProbe:
             httpGet:
               path: /
-              port: 3001
+              port: 3006
             initialDelaySeconds: 60
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: 3001
+              port: 3006
             initialDelaySeconds: 70
             periodSeconds: 10
       initContainers:
@@ -51,6 +80,6 @@ spec:
       volumes:
         - name: dsl
           emptyDir: {}
-        - name: urls-env
-          configMap:
-            name: urls-env-config
+ #       - name: urls-env
+ #         configMap:
+ #           name: urls-env-config
