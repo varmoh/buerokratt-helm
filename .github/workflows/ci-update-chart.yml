@@ -1,0 +1,27 @@
+name: Update Chart Version
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - '.env'
+
+jobs:
+  update_chart_version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install pyyaml
+
+    - name: Run Python script to update Chart version
+      run: python update_chart.py
