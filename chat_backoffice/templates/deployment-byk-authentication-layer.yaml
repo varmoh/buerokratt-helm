@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-backoffice-login
-          image: ghcr.io/buerokratt/authentication-layer:pre-alpha-1.1.0
+          image: "{{ .Values.images.authentication.registry }}/{{ .Values.images.authentication.repository }}:{{ .Values.images.authentication.tag }}"
           #command: ["/bin/sh"]
           #args: ["-c", "tail -f /dev/null"]
           ports:

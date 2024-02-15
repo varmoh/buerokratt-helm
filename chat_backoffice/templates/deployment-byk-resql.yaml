@@ -47,7 +47,7 @@ spec:
 #            periodSeconds: 10
       initContainers:
         - name: dsl-installer
-          image: {{ .Values.byk.dsl.image.registry }}/{{ .Values.byk.dsl.image.repository }}:{{ .Values.byk.dsl.image.tag }}
+          image: "{{ .Values.byk.dsl.image.registry }}/{{ .Values.byk.dsl.image.repository }}:{{ .Values.byk.dsl.image.tag }}"
           volumeMounts:
             - name: dsl
               mountPath: /root/DSL/

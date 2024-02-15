@@ -13,7 +13,7 @@ spec:
     spec:
       initContainers:
       - name: init-keytool
-        image: {{ .Values.images.tim.registry }}/{{ .Values.images.tim.repository }}:{{ .Values.images.tim.tag }}
+        image: "{{ .Values.images.tim.registry }}/{{ .Values.images.tim.repository }}:{{ .Values.images.tim.tag }}"
         command: 
           - 'sh'
           - '-c'

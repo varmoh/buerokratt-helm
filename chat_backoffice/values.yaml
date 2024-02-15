@@ -49,10 +49,6 @@ byk:
     dsl:
       repo: https://github.com/buerokratt/Buerokratt-Chatbot.git
       path: DSL/Liquibase
-  widget:
-    index:
-      repo: https://github.com/varmoh/Installation-Guides.git
-      path: default-setup/backoffice-and-bykstack/chat-widget/index.html
   tim:
     env:
       security:
@@ -123,4 +119,28 @@ images:
   resql:
     registry: "ghcr.io"
     repository: "buerokratt/resql"
-    tag: "re-alpha-2.4.0-27"
+    tag: "pre-alpha-2.4.0-27"
+  authentication:
+    registry: "ghcr.io"
+    repository: "buerokratt/authentication-layer"
+    tag: "pre-alpha-1.1.0"
+  widget:
+    registry: "ghcr.io"
+    repository: "buerokratt/chat-widget"
+    tag: "pre-alpha-1.2.1"
+  services:
+    registry: "ghcr.io"
+    repository: "buerokratt/service-module"
+    tag: "pre-alpha-1.2.0"
+  training:
+    registry: "ghcr.io"
+    repository: "buerokratt/training-module"
+    tag: "pre-alpha-1.12.1"
+  backoffice:
+    registry: "ghcr.io"
+    repository: "buerokratt/buerokratt-chatbot"
+    tag: "pre-alpha-test-2.3.11"
+  analytics:
+    registry: "ghcr.io"
+    repository: "buerokratt/analytics-module"
+    tag: "beta-1.2.8"

@@ -13,8 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-backoffice-gui
-#          image: "ghcr.io/varmoh/buerokratt-chatbot:pre-alpha-varmo-2.1.3"
-          image: "ghcr.io/buerokratt/buerokratt-chatbot:pre-alpha-test-2.3.11"
+          image: "{{ .Values.images.services.registry }}/{{ .Values.images.services.repository }}:{{ .Values.images.services.tag }}"
           ports:
             - containerPort: 3001
               name: http
