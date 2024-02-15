@@ -1,35 +1,44 @@
 import os
-import yaml
+import subprocess
 
-def read_version_from_env():
-    # Read version from .env file
-    env_file_path = os.path.join(os.getcwd(), '.env')
+def get_new_line_from_env(env_file_path):
     with open(env_file_path, 'r') as env_file:
-        lines = env_file.readlines()
-        for line in lines:
-            if line.startswith('VERSION='):
-                return line.split('=')[1].strip()
+        for line in env_file:
+            if line.startswith('version'):
+                return line.strip() + '\n'
+    return None
 
-def update_chart_version(version):
-    # Load Chart.yaml
-    chart_file_path = os.path.join(os.getcwd(), 'chat_backoffice', 'Chart.yaml')
-    with open(chart_file_path, 'r') as chart_file:
-        chart_data = yaml.safe_load(chart_file)
+def update_chart_yaml(file_path, new_line):
+    
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
 
-    # Update version
-    chart_data['version'] = version
+   
+    lines[5] = new_line
 
-    # Write updated Chart.yaml
-    with open(chart_file_path, 'w') as chart_file:
-        yaml.dump(chart_data, chart_file)
+    
+    with open(file_path, 'w') as file:
+        file.writelines(lines)
 
-def main():
-    version = read_version_from_env()
-    if version:
-        update_chart_version(version)
-        print(f"Chart version updated to {version}")
+
+env_file_path = '.env'  # Adjust the path to your .env file
+chart_file_path = 'chat_backoffice/Chart.yaml'  
+commit_message = 'Update version in Chart.yaml'  
+
+new_line = get_new_line_from_env(env_file_path)
+if new_line:
+    print("New line to be added to Chart.yaml:", new_line)
+    if os.path.isfile(chart_file_path):
+        print("Chart.yaml exists.")
+        try:
+            update_chart_yaml(chart_file_path, new_line)
+            print("Chart.yaml updated successfully!")
+            commit_changes(chart_file_path, commit_message)
+            print("Changes committed successfully!")
+        except Exception as e:
+            print("Error updating Chart.yaml:", e)
     else:
-        print("Version not found in .env file")
+        print("Error: Chart.yaml file not found.")
+else:
+    print("Error: 'version' line not found in the .env file.")
 
-if __name__ == "__main__":
-    main()
