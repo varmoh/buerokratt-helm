@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-training-gui
-          image: "ghcr.io/varmoh/training-module:pre-alpha-varmo-1.13.18"
+          image: "{{ .Values.images.training.registry }}/{{ .Values.images.training.repository }}:{{ .Values.images.training.tag }}"
           ports:
             - containerPort: 3001
               name: http

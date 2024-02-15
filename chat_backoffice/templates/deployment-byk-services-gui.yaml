@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-services-gui
-          image: "ghcr.io/buerokratt/service-module:pre-alpha-1.2.0"
+          image: "{{ .Values.images.services.registry }}/{{ .Values.images.services.repository }}:{{ .Values.images.services.tag }}"
           ports:
             - containerPort: 3006
               name: http

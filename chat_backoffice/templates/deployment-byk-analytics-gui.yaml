@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-analytics-gui
-          image: "ghcr.io/varmoh/analytics-module:pre-alpha-varmo-1.3.2"
+          image: "{{ .Values.images.analytics.registry }}/{{ .Values.images.analytics.repository }}:{{ .Values.images.analytics.tag }}"
           ports:
             - containerPort: 3001
               name: http

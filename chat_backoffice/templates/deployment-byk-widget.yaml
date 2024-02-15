@@ -13,12 +13,12 @@ spec:
     spec:
       containers:
         - name: byk-widget
-          image: ghcr.io/buerokratt/chat-widget:pre-alpha-1.2.1
+          image: "{{ .Values.images.widget.registry }}/{{ .Values.images.widget.repository }}:{{ .Values.images.widget.tag }}"
           ports:
             - containerPort: 80
               name: http
           volumeMounts:
-            - name: dsl
+            - name: widget-index-volume
               mountPath: /usr/share/nginx/html/widget/index.html
               subPath: index.html
             - name: widget-config
@@ -36,28 +36,10 @@ spec:
               port: 80
             initialDelaySeconds: 15
             periodSeconds: 10
-      initContainers:
-        - name: dsl-installer
-          image: alpine/git:2.36.3
-          volumeMounts:
-            - name: dsl
-              mountPath: /root/DSL
-          command: ["/bin/sh"]
-          args:
-            - "-c"
-            - >
-              git clone $INDEX_REPO /tmp/index-source &&
-              echo 'downloaded' &&
-              mv /tmp/index-source/$INDEX_PATH /root/DSL/ &&
-              echo 'moved'
-          env:
-            - name: INDEX_REPO
-              value: {{ .Values.byk.widget.index.repo }}
-            - name: INDEX_PATH
-              value: {{ .Values.byk.widget.index.path }}
       volumes:
-        - name: dsl
-          emptyDir: {}
+        - name: widget-index-volume
+          configMap:
+            name: widget-index-config
         - name: widget-config
           configMap:
             name: widget-nginx-config
