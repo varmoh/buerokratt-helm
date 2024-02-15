@@ -3,7 +3,7 @@ name: Update Chart Version
 on:
   push:
     branches:
-      - dev
+      - main
     paths:
       - '.env'
 
