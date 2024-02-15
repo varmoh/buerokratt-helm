@@ -20,11 +20,7 @@ def update_chart_yaml(file_path, new_line):
     with open(file_path, 'w') as file:
         file.writelines(lines)
 
-def commit_changes(file_path, commit_message):
-    subprocess.run(['git', 'add', file_path])
-    subprocess.run(['git', 'commit', '-m', commit_message])
 
-# Example usage:
 env_file_path = '.env'  # Adjust the path to your .env file
 chart_file_path = 'chat_backoffice/Chart.yaml'  
 commit_message = 'Update version in Chart.yaml'  
