@@ -1,0 +1,79 @@
+name: Update Chart Version and Deploy Helm Chart
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.env'
+      
+
+jobs:
+  update_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install pyyaml
+
+    - name: Run Python script to update Chart version
+      run: python update_chart.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add chat_backoffice/Chart.yaml
+        git diff-index --quiet HEAD || git commit -m "Update version in Chart.yaml"
+        git push origin HEAD:${{ github.ref }}
+
+    - name: Set up Helm
+      run: |
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+    - name: Update Chart Dependencies
+      run: |
+       echo "Current working directory: $(pwd)"  # Debug line
+     
+        # Update the chart's dependencies
+        helm dependency update
+      working-directory: ${{ github.workspace }}/chat_backoffice
+
+    - name: Get Chart Version
+      id: chart_version
+      run: |
+        VERSION=$(grep "version:" chat_backoffice/Chart.yaml | awk '{print $2}')
+        echo "Chart version is $VERSION"
+        echo "::set-output name=chart_version::$VERSION"
+        
+    - name: Run your shell script
+      run: |
+        #!/bin/zsh
+        set -e
+
+        VERSION="${{ steps.chart_version.outputs.chart_version }}"
+
+        sed -i -E -e "s/^version: ('.*'|.*)$/version: $VERSION/" chat_backoffice/Chart.yaml
+        helm package chat_backoffice
+        mv chat_backoffice-$VERSION.tgz charts/
+        helm repo index .
+        git add charts/
+
+        # index.yaml should be in the repo root
+
+        # Commit and push the changes
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git commit -m "Update Helm Chart version to $VERSION"
+        git push
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
