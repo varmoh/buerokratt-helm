@@ -1,44 +1,51 @@
 import os
-import subprocess
+import shutil
 
-def get_new_line_from_env(env_file_path):
+def read_version_from_env():
+    # Read version from .env file
+    env_file_path = os.path.join(os.getcwd(), '.env')
     with open(env_file_path, 'r') as env_file:
-        for line in env_file:
+        lines = env_file.readlines()
+        for line in lines:
             if line.startswith('version'):
-                return line.strip() + '\n'
-    return None
+                return line.split('=')[1].strip()
 
-def update_chart_yaml(file_path, new_line):
-    
-    with open(file_path, 'r') as file:
-        lines = file.readlines()
+def update_chart_version(version):
+    # Update line 6 in Chart.yaml with the content from .env
+    chart_file_path = os.path.join(os.getcwd(), 'chat_backoffice', 'Chart.yaml')
+    try:
+        with open(chart_file_path, 'r') as chart_file:
+            chart_lines = chart_file.readlines()
 
-   
-    lines[5] = new_line
+        # Update line 6 with the content from .env
+        chart_lines[5] = f'version: {version}\n'
 
-    
-    with open(file_path, 'w') as file:
-        file.writelines(lines)
+        # Write updated Chart.yaml
+        with open(chart_file_path, 'w') as chart_file:
+            chart_file.writelines(chart_lines)
 
+        print(f"Chart version updated to {version}")
+    except Exception as e:
+        print(f"Error updating Chart version: {e}")
 
-env_file_path = '.env'  # Adjust the path to your .env file
-chart_file_path = 'chat_backoffice/Chart.yaml'  
-commit_message = 'Update version in Chart.yaml'  
-
-new_line = get_new_line_from_env(env_file_path)
-if new_line:
-    print("New line to be added to Chart.yaml:", new_line)
-    if os.path.isfile(chart_file_path):
-        print("Chart.yaml exists.")
-        try:
-            update_chart_yaml(chart_file_path, new_line)
-            print("Chart.yaml updated successfully!")
-            commit_changes(chart_file_path, commit_message)
-            print("Changes committed successfully!")
-        except Exception as e:
-            print("Error updating Chart.yaml:", e)
+def main():
+    version = read_version_from_env()
+    if version:
+        update_chart_version(version)
+        
+        # Create Archive directory if it doesn't exist
+        archive_dir = os.path.join(os.getcwd(), 'charts', 'archive')
+        os.makedirs(archive_dir, exist_ok=True)
+        
+        # Move previous tarball files to Archive directory
+        chart_dir = os.path.join(os.getcwd(), 'charts')
+        for file_name in os.listdir(chart_dir):
+            if file_name.endswith('.tar.gz') and file_name != f'chat_backoffice-{version}.tar.gz':
+                shutil.move(os.path.join(chart_dir, file_name), os.path.join(archive_dir, file_name))
+                
+        print("Previous tarball files moved to Archive folder.")
     else:
-        print("Error: Chart.yaml file not found.")
-else:
-    print("Error: 'version' line not found in the .env file.")
+        print("Version not found in .env file")
 
+if __name__ == "__main__":
+    main()
