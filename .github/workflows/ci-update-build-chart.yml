@@ -87,7 +87,7 @@ jobs:
 
         latest=$(ls -t charts/*.tgz | head -n1)
     
-        mv -f charts/*.tgz charts/archive/ && mv -f "$latest" charts/
+        mv -f charts/*.tgz charts/archive/ && mv -f "$latest" charts/ || true
         
 
     
