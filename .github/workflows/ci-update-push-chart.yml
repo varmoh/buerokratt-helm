@@ -92,3 +92,9 @@ jobs:
         for ((i=1; i<${#files[@]}; i++)); do
             mv "${files[i]}" archive/
         done
+        
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git add archive/
+        git commit -m "Move old versions to archive"
+        git push
