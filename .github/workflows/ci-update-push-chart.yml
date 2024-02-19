@@ -56,16 +56,22 @@ jobs:
         
     - name: Run your shell script
       run: |
-        #!/bin/zsh
-        set -e
+        VERSION=$(grep "version:" chat_backoffice/Chart.yaml | awk '{print $2}')
+        echo "Chart version is $VERSION"
+        echo "::set-output name=chart_version::$VERSION"
+        CHART_NAME="chat_backoffice"
+        ARCHIVE_DIR="charts/archive"
+        CHART_DIR="charts"
 
-        VERSION="${{ steps.chart_version.outputs.chart_version }}"
+        sed -i -E -e "s/^version: ('.*'|.*)$/version: $VERSION/" "${CHART_DIR}/${CHART_NAME}/Chart.yaml"
+        helm package "${CHART_DIR}/${CHART_NAME}"
+        mv "${CHART_DIR}/${CHART_NAME}-${VERSION}.tgz" "${CHART_DIR}/"
+        helm repo index "${CHART_DIR}"
 
-        sed -i -E -e "s/^version: ('.*'|.*)$/version: $VERSION/" chat_backoffice/Chart.yaml
-        helm package chat_backoffice
-        mv chat_backoffice-$VERSION.tgz charts/
-        helm repo index .
-        git add charts/
+        mkdir -p "${ARCHIVE_DIR}"
+        for file_name in $(ls "${CHART_DIR}"/*.tgz | grep -v "${CHART_NAME}-${VERSION}.tgz"); do
+            mv "$file_name" "${ARCHIVE_DIR}/"
+        done
 
         # index.yaml should be in the repo root
 
@@ -74,6 +80,6 @@ jobs:
         git config --global user.name "Your Name"
         git commit -m "Update Helm Chart version to $VERSION"
         git push
-
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
