@@ -85,16 +85,19 @@ jobs:
         # Create archive folder if it doesn't exist
         mkdir -p archive
 
-        # Get list of all tarball files
+    
         files=($(ls -t charts/*.tgz))
 
-        # Move all but the latest version to archive folder
         for ((i=1; i<${#files[@]}; i++)); do
-            mv "${files[i]}" archive/
+        mv "${files[i]}" archive/
         done
-        
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
+
+    
+        if [[ -n $(git status -s) ]]; then
         git add archive/
         git commit -m "Move old versions to archive"
         git push
+        else
+        echo "No old versions to move."
+        fi
+
