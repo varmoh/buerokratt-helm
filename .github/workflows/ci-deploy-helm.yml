@@ -1,31 +1,15 @@
 name: Kubernetes Deployment using helm charts
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'charts/**.tgz'
+  workflow_run:
+    workflows: ["ci-update-build-chart"]
+    types:
+      - completed
 
 jobs:
   check_ci_update_build_chart:
     runs-on: ubuntu-latest
     steps:
-    - name: Check if ci-update-build-chart workflow is running
-      id: check_workflow_status
-      run: |
-        response=$(curl -s -X GET \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          https://api.github.com/repos/${{ github.repository }}/actions/workflows/ci-update-build-chart.yml/runs?status=in_progress)
-        num_running=$(echo "$response" | jq '.total_count')
-        if [ "$num_running" -gt 0 ]; then
-          echo "::error::ci-update-build-chart workflow is currently running. Aborting test."
-          exit 1
-        else
-          echo "ci-update-build-chart workflow is not running. Proceeding with test."
-        fi
 
     - name: Run simple test step
       run: echo "This is a test step."
