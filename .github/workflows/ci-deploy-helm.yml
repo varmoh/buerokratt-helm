@@ -2,7 +2,7 @@ name: Kubernetes Deployment using helm charts
 
 on:
   workflow_run:
-    workflows: ["ci-update-build-chart"]
+    workflows: ["Update Chart Version and build tarball"]
     types:
       - completed
 
