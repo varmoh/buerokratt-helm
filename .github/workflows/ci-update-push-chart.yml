@@ -63,7 +63,9 @@ jobs:
         ARCHIVE_DIR="charts/archive"
         CHART_DIR="charts"
 
-        sed -i -E -e "s/^version: ('.*'|.*)$/version: $VERSION/" "${CHART_DIR}/${CHART_NAME}/Chart.yaml"
+        awk -v new_version="$VERSION" '/version:/ {$2=new_version} 1' "${CHART_DIR}/${CHART_NAME}/Chart.yaml" > "${CHART_DIR}/${CHART_NAME}/Chart_temp.yaml"
+        mv "${CHART_DIR}/${CHART_NAME}/Chart_temp.yaml" "${CHART_DIR}/${CHART_NAME}/Chart.yaml"
+
         helm package "${CHART_DIR}/${CHART_NAME}"
         mv "${CHART_DIR}/${CHART_NAME}-${VERSION}.tgz" "${CHART_DIR}/"
         helm repo index "${CHART_DIR}"
