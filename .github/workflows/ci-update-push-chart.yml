@@ -83,18 +83,18 @@ jobs:
         #!/bin/bash
 
         # Create archive folder if it doesn't exist
-        mkdir -p archive
+        mkdir -p charts/archive
 
     
         files=($(ls -t charts/*.tgz))
 
         for ((i=1; i<${#files[@]}; i++)); do
-        mv "${files[i]}" archive/
+        mv "${files[i]}" charts/archive/
         done
 
     
         if [[ -n $(git status -s) ]]; then
-        git add archive/
+        git add charts/archive/
         git commit -m "Move old versions to archive"
         git push
         else
