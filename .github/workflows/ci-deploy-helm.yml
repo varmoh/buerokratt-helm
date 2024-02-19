@@ -19,9 +19,6 @@ jobs:
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
-    - name: Fetch token file
-      run: echo "${{ secrets.EXPORT_TOKEN_FILE }}" > tokenfile.yml
-
     - name: Get Helm chart name
       id: get_chart_name
       run: |
@@ -38,13 +35,15 @@ jobs:
     - name: Install or Upgrade project
       if: steps.check_projects.outputs.projects != ${{ steps.get_chart_name.outputs.chart_name }}
       run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" > kubeconfig.yaml
         helm install ${{ steps.get_chart_name.outputs.chart_name }} \
           --namespace ${{ secrets.K8S_NAMESPACE }} \
-          -f tokenfile.yml
+          --kubeconfig kubeconfig.yaml
 
     - name: Upgrade project
       if: steps.check_projects.outputs.projects == ${{ steps.get_chart_name.outputs.chart_name }}
       run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" > kubeconfig.yaml
         helm upgrade ${{ steps.get_chart_name.outputs.chart_name }} \
           --namespace ${{ secrets.K8S_NAMESPACE }} \
-          -f tokenfile.yml \
+          --kubeconfig kubeconfig.yaml
