@@ -2,6 +2,11 @@ name: Kubernetes Deployment using helm charts
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/**.tgz'
 
 jobs:
   check_ci_update_build_chart:
