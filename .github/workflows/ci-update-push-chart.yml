@@ -54,7 +54,8 @@ jobs:
         echo "Chart version is $VERSION"
         echo "::set-output name=chart_version::$VERSION"
         - name: Run your shell script
-        
+
+    - name: Run the shell script
       run: |
         #!/bin/bash
         set -e
