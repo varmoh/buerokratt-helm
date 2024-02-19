@@ -1,4 +1,4 @@
-name: Update Chart Version and Deploy Helm Chart
+name: Update Chart Version and build tarball
 
 on:
   push:
@@ -56,24 +56,16 @@ jobs:
         
     - name: Run your shell script
       run: |
-        VERSION=$(grep "version:" chat_backoffice/Chart.yaml | awk '{print $2}')
-        echo "Chart version is $VERSION"
-        echo "::set-output name=chart_version::$VERSION"
-        CHART_NAME="chat_backoffice"
-        ARCHIVE_DIR="charts/archive"
-        CHART_DIR="charts"
+        #!/bin/zsh
+        set -e
 
-        awk -v new_version="$VERSION" '/version:/ {$2=new_version} 1' "${CHART_DIR}/${CHART_NAME}/Chart.yaml" > "${CHART_DIR}/${CHART_NAME}/Chart_temp.yaml"
-        mv "${CHART_DIR}/${CHART_NAME}/Chart_temp.yaml" "${CHART_DIR}/${CHART_NAME}/Chart.yaml"
+        VERSION="${{ steps.chart_version.outputs.chart_version }}"
 
-        helm package "${CHART_DIR}/${CHART_NAME}"
-        mv "${CHART_DIR}/${CHART_NAME}-${VERSION}.tgz" "${CHART_DIR}/"
-        helm repo index "${CHART_DIR}"
-
-        mkdir -p "${ARCHIVE_DIR}"
-        for file_name in $(ls "${CHART_DIR}"/*.tgz | grep -v "${CHART_NAME}-${VERSION}.tgz"); do
-            mv "$file_name" "${ARCHIVE_DIR}/"
-        done
+        sed -i -E -e "s/^version: ('.*'|.*)$/version: $VERSION/" chat_backoffice/Chart.yaml
+        helm package chat_backoffice
+        mv chat_backoffice-$VERSION.tgz charts/
+        helm repo index .
+        git add charts/
 
         # index.yaml should be in the repo root
 
@@ -82,6 +74,21 @@ jobs:
         git config --global user.name "Your Name"
         git commit -m "Update Helm Chart version to $VERSION"
         git push
-      shell: bash
+
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Move old versions to archive
+      run: |
+        #!/bin/bash
+
+        # Create archive folder if it doesn't exist
+        mkdir -p archive
+
+        # Get list of all tarball files
+        files=($(ls -t charts/*.tgz))
+
+        # Move all but the latest version to archive folder
+        for ((i=1; i<${#files[@]}; i++)); do
+            mv "${files[i]}" archive/
+        done
