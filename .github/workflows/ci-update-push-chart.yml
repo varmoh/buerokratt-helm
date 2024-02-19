@@ -89,7 +89,7 @@ jobs:
         files=($(ls -t charts/*.tgz))
 
         for ((i=1; i<${#files[@]}; i++)); do
-        mv -f charts/*.tgz charts/archive/ || true
+        mv -f charts/*.tgz charts/archive/ && rm -f charts/*.tgz || true
         done
 
     
