@@ -53,9 +53,8 @@ jobs:
         VERSION=$(grep "version:" chat_backoffice/Chart.yaml | awk '{print $2}')
         echo "Chart version is $VERSION"
         echo "::set-output name=chart_version::$VERSION"
-        - name: Run your shell script
-
-    - name: Run the shell script
+        
+    - name: Run your shell script
       run: |
         #!/bin/zsh
         set -e
@@ -68,6 +67,13 @@ jobs:
         helm repo index .
         git add charts/
 
+        # index.yaml should be in the repo root
+
+        # Commit and push the changes
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git commit -m "Update Helm Chart version to $VERSION"
+        git push
+
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
