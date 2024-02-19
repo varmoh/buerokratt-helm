@@ -57,10 +57,9 @@ jobs:
 
     - name: Run the shell script
       run: |
-        #!/bin/bash
-        set -e
-
-        VERSION="${{ steps.chart_version.outputs.chart_version }}"
+        VERSION=$(grep "version:" chat_backoffice/Chart.yaml | awk '{print $2}')
+        echo "Chart version is $VERSION"
+        echo "::set-output name=chart_version::$VERSION"
         CHART_NAME="chat_backoffice"
         ARCHIVE_DIR="charts/archive"
         CHART_DIR="charts"
@@ -69,19 +68,11 @@ jobs:
         helm package "${CHART_DIR}/${CHART_NAME}"
         mv "${CHART_DIR}/${CHART_NAME}-${VERSION}.tgz" "${CHART_DIR}/"
         helm repo index "${CHART_DIR}"
-        git add "${CHART_DIR}/"
 
-        # Move previous tarball files to Archive directory
         mkdir -p "${ARCHIVE_DIR}"
         for file_name in $(ls "${CHART_DIR}"/*.tgz | grep -v "${CHART_NAME}-${VERSION}.tgz"); do
             mv "$file_name" "${ARCHIVE_DIR}/"
         done
-
-        # Commit and push the changes
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-        git commit -m "Update Helm Chart version to $VERSION"
-        git push
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
