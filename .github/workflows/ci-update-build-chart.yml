@@ -16,6 +16,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Move old versions to archive
+      run: |
+        #!/bin/bash
+
+        # Create archive folder if it doesn't exist
+        mkdir -p charts/archive
+
+        latest=$(ls -t charts/*.tgz | head -n1)
+    
+        mv -f charts/*.tgz charts/archive/ && mv -f "$latest" charts/ || true
+        
+        if [[ -n $(git status -s) ]]; then
+        git add charts/archive/
+        git add charts/
+        git commit -m "Move old versions to archive"
+        git push
+        else
+        echo "No old versions to move."
+        fi
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -78,25 +98,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Move old versions to archive
-      run: |
-        #!/bin/bash
 
-        # Create archive folder if it doesn't exist
-        mkdir -p charts/archive
-
-        latest=$(ls -t charts/*.tgz | head -n1)
-    
-        mv -f charts/*.tgz charts/archive/ && mv -f "$latest" charts/ || true
-        
-
-    
-        if [[ -n $(git status -s) ]]; then
-        git add charts/archive/
-        git add charts/
-        git commit -m "Move old versions to archive"
-        git push
-        else
-        echo "No old versions to move."
-        fi
 
