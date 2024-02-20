@@ -103,8 +103,6 @@ jobs:
   deploy_helm:
     needs: update_and_build
     runs-on: ubuntu-latest
-
-    if: ${{ needs.update_chart.result == 'success' }}
     
     steps:
     - name: Checkout code
