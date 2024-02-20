@@ -10,6 +10,8 @@ on:
 jobs:
   update_and_deploy:
     runs-on: ubuntu-latest
+outputs:
+  chart_updated: ${{ steps.chart_version.outputs.chart_version }}
 
     steps:
     - name: Checkout code
@@ -98,6 +100,5 @@ jobs:
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
 
