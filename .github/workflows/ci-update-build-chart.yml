@@ -1,5 +1,4 @@
-name: Update Chart Version and build tarball
-
+name: Update and build chart
 on:
   push:
     branches:
