@@ -1,0 +1,49 @@
+name: Deploy byk helm charts
+
+on:
+  workflow_run:
+    workflows: ["Update Chart Version and build tarball"]
+    types:
+      - completed
+
+jobs:
+  deploy_helm:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up kubectl
+      uses: azure/k8s-set-context@v1
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+
+    - name: Get Helm chart name
+      id: get_chart_name
+      run: |
+        chart_file=$(find charts/*.tgz)
+        chart_name=$(basename "$chart_file" .tgz)
+        echo "::set-output name=chart_name::$chart_name"
+
+    - name: Get installed projects
+      id: check_projects
+      run: |
+        projects=$(kubectl get deployments -n ${{ secrets.K8S_NAMESPACE }} -o jsonpath='{.items[*].metadata.labels.app}')
+        echo "::set-output name=projects::$projects"
+
+    - name: Install or Upgrade project
+      if: steps.check_projects.outputs.projects != ${{ steps.get_chart_name.outputs.chart_name }}
+      run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" > kubeconfig.yaml
+        helm install ${{ steps.get_chart_name.outputs.chart_name }} \
+          --namespace ${{ secrets.K8S_NAMESPACE }} \
+          --kubeconfig kubeconfig.yaml
+
+    - name: Upgrade project
+      if: steps.check_projects.outputs.projects == ${{ steps.get_chart_name.outputs.chart_name }}
+      run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" > kubeconfig.yaml
+        helm upgrade ${{ steps.get_chart_name.outputs.chart_name }} \
+          --namespace ${{ secrets.K8S_NAMESPACE }} \
+          --kubeconfig kubeconfig.yaml
