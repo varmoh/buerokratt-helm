@@ -3,7 +3,7 @@ name: Update Chart Version and build tarball
 on:
   push:
     branches:
-      - main
+      - dev
     paths:
       - '.env'
       
