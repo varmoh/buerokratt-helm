@@ -107,5 +107,5 @@ jobs:
          - name: Dispatch update completed event
            uses: peter-evans/repository-dispatch@v1
            with:
-             token: ${{ secrets.DISPATCH_TOKEN }}
+             token: ${{ secrets.GITHUB_TOKEN }}
              event-type: chart_updated
