@@ -1,8 +1,10 @@
 name: Deploy helm charts
 
 on:
-  repository_dispatch:
-    types: [chart_updated]
+  workflow_run:
+    workflows: ["Update and build chart"]
+    types:
+      - completed
 
 jobs:
   deploy_helm:
