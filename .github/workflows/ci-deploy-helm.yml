@@ -1,8 +1,11 @@
 name: Deploy helm charts
 
 on:
-  repository_dispatch:
-    types: [chart_updated]
+  push:
+    paths:
+      - 'charts/*.tgz'
+    paths-ignore:
+      - 'charts/*/*.tgz'
 
 jobs:
   deploy_helm:
