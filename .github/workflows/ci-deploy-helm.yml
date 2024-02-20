@@ -2,6 +2,8 @@ name: Deploy helm charts
 
 on:
   push:
+    branches:
+      - dev
     paths:
       - 'charts/*.tgz'
     paths-ignore:
