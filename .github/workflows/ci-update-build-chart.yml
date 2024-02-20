@@ -98,14 +98,3 @@ jobs:
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  notify_completion:
-       runs-on: ubuntu-latest
-       needs: update_and_deploy
-       if: always()
-       steps:
-         - name: Dispatch update completed event
-           uses: peter-evans/repository-dispatch@v1
-           with:
-             token: ${{ secrets.GITHUB_TOKEN }}
-             event-type: chart_updated
