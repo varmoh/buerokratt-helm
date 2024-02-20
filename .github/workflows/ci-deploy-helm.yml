@@ -6,8 +6,8 @@ on:
       - dev
     paths:
       - 'charts/*.tgz'
-    paths-ignore:
-      - 'charts/*/*.tgz'
+#    paths-ignore:
+#      - 'charts/*/*.tgz'
 
 jobs:
   deploy_helm:
