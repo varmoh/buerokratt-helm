@@ -1,4 +1,4 @@
-name: Deploy byk helm charts
+name: Deploy helm charts
 
 on:
   workflow_run:
