@@ -10,9 +10,6 @@ on:
 jobs:
   update_and_deploy:
     runs-on: ubuntu-latest
-    
-    outputs:
-      chart_updated: ${{ steps.chart_version.outputs.chart_version }}
 
     steps:
     - name: Checkout code
@@ -102,4 +99,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
+  notify_completion:
+       runs-on: ubuntu-latest
+       needs: update_and_deploy
+       if: always()
+       steps:
+         - name: Dispatch update completed event
+           uses: peter-evans/repository-dispatch@v1
+           with:
+             token: ${{ secrets.DISPATCH_TOKEN }}
+             event-type: chart_updated
