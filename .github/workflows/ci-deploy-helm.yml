@@ -1,14 +1,11 @@
 name: Deploy helm charts
 
 on:
-  workflow_run:
-    workflows: ["Update and build chart"]
-    types:
-      - completed
+  repository_dispatch:
+    types: [chart_updated]
 
 jobs:
   deploy_helm:
-    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     
     steps:
