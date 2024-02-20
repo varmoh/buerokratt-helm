@@ -2,7 +2,7 @@ name: Deploy helm charts
 
 on:
   workflow_run:
-    workflows: ["Update Chart Version and build tarball"]
+    workflows: ["Update and build chart"]
     types:
       - completed
 
