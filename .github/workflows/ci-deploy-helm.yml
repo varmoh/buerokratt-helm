@@ -1,11 +1,8 @@
 name: Deploy helm charts
 
 on:
-  push:
-    branches:
-      - dev
-    paths:
-      - 'charts/*.tgz'
+  repository_dispatch:
+    types: [chart_updated]
 
 jobs:
   deploy_helm:
