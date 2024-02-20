@@ -1,10 +1,11 @@
 name: Deploy helm charts
 
 on:
-  workflow_run:
-    workflows: ["Update and build chart"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/.*tgz'
 
 jobs:
   deploy_helm:

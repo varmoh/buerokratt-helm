@@ -2,9 +2,9 @@ name: Update and build chart
 on:
   push:
     branches:
-      - dev
+      - main
     paths:
-      - '.env.test'
+      - '.env.test' # To run this as separate workflow either create a new .env file or disable the ci-full-deployment
       
 
 jobs:
