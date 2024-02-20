@@ -19,6 +19,12 @@ jobs:
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
+    - name: Create namespace if it doesn't exist
+      run: |
+        kubectl get namespace ${NAMESPACE} || kubectl create namespace ${NAMESPACE}
+      env:
+        NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+
     - name: Get Helm chart name
       id: get_chart_name
       run: |
