@@ -18,8 +18,8 @@ data:
     logging.level.root={{ .Values.byk.tim.env.logging.level.root }}
     {{ $dbName := index .Values "tim-postgresql" "auth" "database" }}
     spring.datasource.url=jdbc:postgresql://{{ .Release.Name }}-tim-postgresql:5432/{{ $dbName }}
-    spring.datasource.username={{ index .Values "tim-postgresql" "auth" "username" }}
-    spring.datasource.password=${DB_PASSWORD}
+    spring.datasource.username=tim
+    spring.datasource.password=123
     spring.datasource.driver-class-name=org.postgresql.Driver
     spring.liquibase.change-log=classpath:master.xml
 
