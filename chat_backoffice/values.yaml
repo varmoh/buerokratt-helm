@@ -107,7 +107,7 @@ images:
   tim:
     registry: "ghcr.io"
     repository: "buerokratt/tim"
-    tag: "pre-apha-2.4.2"
+    tag: "pre-apha-2.3.1"
   ruuter:
     registry: "ghcr.io"
     repository: "buerokratt/ruuter"
