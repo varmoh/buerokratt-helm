@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: byk-backoffice-gui
-          image: "{{ .Values.images.services.registry }}/{{ .Values.images.services.repository }}:{{ .Values.images.services.tag }}"
+          image: "{{ .Values.images.backoffice.registry }}/{{ .Values.images.backoffice.repository }}:{{ .Values.images.backoffice.tag }}"
           ports:
             - containerPort: 3001
               name: http
