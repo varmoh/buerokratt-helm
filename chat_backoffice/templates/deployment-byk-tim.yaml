@@ -60,18 +60,18 @@ spec:
           subPath: application.properties
         - name: workspace-shared
           mountPath: /workspace/app-shared
-#        livenessProbe:
-#          httpGet:
-#            path: /
-#            port: 8085
-#          initialDelaySeconds: 45
-#          periodSeconds: 10
-#        readinessProbe:
-#          httpGet:
-#            path: /
-#            port: 8085
-#          initialDelaySeconds: 45
-#          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8085
+          initialDelaySeconds: 45
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8085
+          initialDelaySeconds: 45
+          periodSeconds: 10
 
       volumes:
       - name: tomcat-config
