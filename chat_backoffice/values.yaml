@@ -110,7 +110,7 @@ images:
     tag: "pre-apha-2.4.2"
   ruuter:
     registry: "ghcr.io"
-    repository: "buerokratt/Ruuter"
+    repository: "buerokratt/ruuter"
     tag: "pre-alpha-2.4.1" 
   dmapper:
     registry: "ghcr.io"
