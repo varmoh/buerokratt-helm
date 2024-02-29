@@ -51,10 +51,8 @@ spec:
           args:
             - "-c"
             - |
-              git clone --branch dev --single-branch https://github.com/buerokratt/Buerokratt-Chatbot.git /mnt/notification-server
-        - name: move-files
-          image: alpine:latest
-          command: ["sh", "-c", "mv /mnt/notification-server/Buerokratt-Chatbot/notification-server/* /app/notification-server/"]
+              git clone --branch dev --single-branch https://github.com/buerokratt/Buerokratt-Chatbot.git /app/Buerokratt-Chatbot && \
+              cp -r /app/Buerokratt-Chatbot/notification-server/* /app/notification-server/
           volumeMounts:
             - name: notification-server
               mountPath: /app/notification-server
