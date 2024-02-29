@@ -15,6 +15,7 @@ data:
     <script>
       window._env_ = {
         RUUTER_API_URL: 'https://ruuter.test.buerokratt.ee',
+        NOTIFICATION_NODE_URL: 'https://ruuter.test.buerokratt.ee/notifications',
         TIM_AUTHENTICATION_URL: 'https://tim.test.buerokratt.ee/oauth2/authorization/tara?callback_url=https://test.buerokratt.ee',
         OFFICE_HOURS: {
           TIMEZONE: 'Europe/Tallinn',
