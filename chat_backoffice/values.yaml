@@ -144,3 +144,7 @@ images:
     registry: "ghcr.io"
     repository: "buerokratt/analytics-module"
     tag: "beta-1.2.8"
+  notification:
+    registry: "riaee"
+    repository: "byk"
+    tag: "notification-server-1.0.0"    
