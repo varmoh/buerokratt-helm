@@ -44,18 +44,17 @@ spec:
           emptyDir: {}
         - name: notification-server
           emptyDir: {}
-  initContainers:
-    - name: clone-repo
-      image: alpine/git
-      command: ["/bin/sh"]
-      args:
-        - "-c"
-        - |
-          git clone --branch dev --single-branch https://github.com/buerokratt/Buerokratt-Chatbot.git /mnt/notification-server
-    - name: move-files
-      image: alpine:latest
-      command: ["sh", "-c", "mv /mnt/notification-server/* /app/notification-server/"]
-      volumeMounts:
-        - name: notification-server
-          mountPath: /app/notification-server
-
+      initContainers:
+        - name: clone-repo
+          image: alpine/git
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - |
+              git clone --branch dev --single-branch https://github.com/buerokratt/Buerokratt-Chatbot.git /mnt/notification-server
+        - name: move-files
+          image: alpine:latest
+          command: ["sh", "-c", "mv /mnt/notification-server/* /app/notification-server/"]
+          volumeMounts:
+            - name: notification-server
+              mountPath: /app/notification-server
