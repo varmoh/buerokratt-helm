@@ -46,6 +46,8 @@ spec:
               value: "https://admin.test.buerokratt.ee/monitoring"
             - name: REACT_APP_SERVICE_ID
               value: "conversations,settings,monitoring"
+            - name: REACT_APP_NOTIFICATION_NODE_URL
+              value: https://ruuter.test.buerokratt.ee/notifications
           livenessProbe:
             httpGet:
               path: /
