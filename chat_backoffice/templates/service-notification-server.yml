@@ -6,7 +6,7 @@ spec:
   selector:
     app: notifications-node
   ports:
-    - port: TCP
+    - port: 4040
       targetPort: 4040
       protocol: TCP
       name: http
