@@ -3,8 +3,8 @@ kind: Ingress
 metadata:
   name: ruuter-ingress
   annotations:
-#    kubernetes.io/ingress.class: "nginx"
-    kubernetes.io/ingress.class: caddy
+    kubernetes.io/ingress.class: "nginx"
+#    kubernetes.io/ingress.class: caddy
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
     nginx.ingress.kubernetes.io/cors-allow-origin: "https://admin.test.buerokratt.ee, https://test.buerokratt.ee, https://tim.buerokratt.ee, https://admin.dev.buerokratt.ee"
