@@ -1,10 +1,11 @@
+
 name: Update and build chart
 on:
   push:
     branches:
       - dev
     paths:
-      - '.env' # To run this as separate workflow either create a new .env file or disable the ci-full-deployment
+      - '.env.full'
       
 
 jobs:
@@ -98,4 +99,51 @@ jobs:
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+  deploy_helm:
+    needs: update_and_build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
+    - name: Set up kubectl
+      uses: azure/k8s-set-context@v1
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+
+    - name: Create namespace if it doesn't exist
+      run: |
+        kubectl get namespace ${NAMESPACE} || kubectl create namespace ${NAMESPACE}
+      env:
+        NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+
+    - name: Get Helm chart name
+      id: get_chart_name
+      run: |
+        chart_file=$(find charts/*.tgz)
+        chart_name=$(basename "$chart_file" .tgz)
+        echo "::set-output name=chart_name::$chart_name"
+
+    - name: Get installed projects
+      id: check_projects
+      run: |
+        projects=$(kubectl get deployments -n ${{ secrets.K8S_NAMESPACE }} -o jsonpath='{.items[*].metadata.labels.app}')
+        echo "::set-output name=projects::$projects"
+
+    - name: Install or Upgrade project
+      if: steps.check_projects.outputs.projects != ${{ steps.get_chart_name.outputs.chart_name }}
+      run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" > kubeconfig.yaml
+        helm install ${{ steps.get_chart_name.outputs.chart_name }} \
+          --namespace ${{ secrets.K8S_NAMESPACE }} \
+          --kubeconfig kubeconfig.yaml
+
+    - name: Upgrade project
+      if: steps.check_projects.outputs.projects == ${{ steps.get_chart_name.outputs.chart_name }}
+      run: |
+        echo "${{ secrets.KUBE_CONFIG_DATA }}" > kubeconfig.yaml
+        helm upgrade ${{ steps.get_chart_name.outputs.chart_name }} \
+          --namespace ${{ secrets.K8S_NAMESPACE }} \
+          --kubeconfig kubeconfig.yaml

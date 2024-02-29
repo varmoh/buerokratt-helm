@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-node-service
+spec:
+  selector:
+    app: notifications-node
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4040
+  type: ClusterIP

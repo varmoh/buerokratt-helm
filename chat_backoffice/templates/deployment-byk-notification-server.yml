@@ -1,0 +1,62 @@
+# templates/notifications-node-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifications-node
+  template:
+    metadata:
+      labels:
+        app: notifications-node
+    spec:
+      containers:
+        - name: notifications-node
+          image: "{{ .Values.images.notification.registry }}/{{ .Values.images.notification.repository }}:{{ .Values.images.notification.tag }}"
+          ports:
+            - containerPort: 4040
+          env:
+            - name: OPENSEARCH_PROTOCOL
+              value: "http"
+            - name: OPENSEARCH_HOST
+              value: "opensearch-node"
+            - name: OPENSEARCH_PORT
+              value: "9200"
+            - name: OPENSEARCH_USERNAME
+              value: "admin"
+            - name: OPENSEARCH_PASSWORD
+              value: "admin"
+            - name: PORT
+              value: "4040"
+            - name: REFRESH_INTERVAL
+              value: "1000"
+            - name: CORS_WHITELIST_ORIGINS
+              value: "http://localhost:3001,http://localhost:3003,http://localhost:3004,http://localhost:8080"
+          volumeMounts:
+            - name: node-modules
+              mountPath: /app/node_modules
+            - name: notification-server
+              mountPath: /app/notification-server
+      volumes:
+        - name: node-modules
+          emptyDir: {}
+        - name: notification-server
+          emptyDir: {}
+  initContainers:
+    - name: clone-repo
+      image: alpine/git
+      command:
+        - "sh"
+        - "-c"
+        - |
+          git clone --branch dev --single-branch https://github.com/buerokratt/Buerokratt-Chatbot.git /mnt/notification-server
+    - name: move-files
+      image: alpine:latest
+      command: ["sh", "-c", "mv /mnt/notification-server/notification-server/* /app/notification-server/"]
+      volumeMounts:
+        - name: notification-server
+          mountPath: /app/notification-server

@@ -110,8 +110,8 @@ images:
     tag: "pre-apha-2.4.2"
   ruuter:
     registry: "ghcr.io"
-    repository: "buerokratt/Ruuter"
-    tag: "pre-alpha-2.4.1" 
+    repository: "buerokratt/ruuter"
+    tag: "pre-alpha-2.3.14-237" 
   dmapper:
     registry: "ghcr.io"
     repository: "buerokratt/datamapper"
@@ -144,3 +144,7 @@ images:
     registry: "ghcr.io"
     repository: "buerokratt/analytics-module"
     tag: "beta-1.2.8"
+  notification:
+    registry: "riaee"
+    repository: "byk"
+    tag: "notification-server-1.0.0"    

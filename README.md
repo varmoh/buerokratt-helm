@@ -48,5 +48,5 @@ version: 0.1.49
 
 This will start workflows.
 
-First workflow - moves older version of tarball into charts/archive folder, assigns the given version for the new to be created tarball and then builds and publishes it.  
-Second workflow - connects to k8s environment and either installs new project or upgrades the existing one.
+First half of the workflow moves older version of tarball into charts/archive folder, assigns the given version for the new to be created tarball and then builds and publishes it.  
+Second half of the workflow connects to k8s environment and either installs new project or upgrades the existing one.  
