@@ -10,7 +10,7 @@ data:
     CHATBOT_DMAPPER=http://byk-dmapper-v2:3000
     CHATBOT_TIM=http://byk-tim:8085
     CHATBOT_OPENSEARCH=http://opensearch-node:9200
-    CHATBOT_NOTIFICATIONS=http://localhost:4040
+    CHATBOT_NOTIFICATIONS=http://notifications-nodet:4040
     DOMAIN=test.buerokratt.ee
       
   server.xml: |

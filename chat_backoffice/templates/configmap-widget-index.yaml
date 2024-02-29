@@ -14,7 +14,7 @@ data:
     <div id="byk-va"></div>
     <script>
       window._env_ = {
-        RUUTER_API_URL: 'https://ruuter.test.buerokratt.ee',
+        RUUTER_API_URL: 'https://ruuter.test.buerokratt.ee/v2/public',
         NOTIFICATION_NODE_URL: 'https://ruuter.test.buerokratt.ee/notifications',
         TIM_AUTHENTICATION_URL: 'https://tim.test.buerokratt.ee/oauth2/authorization/tara?callback_url=https://test.buerokratt.ee',
         OFFICE_HOURS: {
