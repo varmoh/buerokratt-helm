@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notifications-node
-          image: "{{ .Values.images.notification.registry }}/{{ .Values.images.notification.repository }}:{{ .Values.images.notification.tag }}"
+          image: riaee/byk:notification-server-1.0.0 
           ports:
             - containerPort: 4040
           env:
@@ -35,7 +35,7 @@ spec:
             - name: REFRESH_INTERVAL
               value: "1000"
             - name: CORS_WHITELIST_ORIGINS
-              value: "http://localhost:3001,http://localhost:3003,http://localhost:3004,http://localhost:8080"
+              value: "http://byk-widget,http://byk-backoffice-gui,http://byk-ruuter-private,http://lbyk-ruuter"
           volumeMounts:
             - name: node-modules
               mountPath: /app/node_modules
