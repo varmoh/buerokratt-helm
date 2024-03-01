@@ -2,15 +2,25 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: notifications-node-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  labels:
+    name: notifications-node-ingress
 spec:
   rules:
-    - host: ruuter.{{ .Values.domain }}
-      http:
-        paths:
-          - path: /notifications
-            pathType: Prefix
-            backend:
-              service:
-                name: notifications-node-service
-                port:
-                  number: 80
+  - host: ruuter.{{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/notifications"
+        backend:
+          service:
+            name: notification-node
+            port:
+              number: 4040
+  tls:
+  - hosts:
+    - ruuter.{{ .Values.domain }}
+    secretName: byk-tls-notifications-node-secret 
