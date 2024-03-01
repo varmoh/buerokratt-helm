@@ -39,6 +39,6 @@ data:
       "PASSWORD_AUTH_ENABLED": true,
       "BACKOFFICE_URL": "https://admin.test.buerokratt.ee/chat",
       "INSTITUTION_FORWARDING_ENABLED": true,
-      "AUTHORITY_NAME": 'TEST BYK',
+      "AUTHORITY_NAME": 'TEST',
 
     };
