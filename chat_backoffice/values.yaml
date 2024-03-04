@@ -29,7 +29,7 @@ byk:
     image:
       registry: "ghcr.io"
       repository: "buerokratt/buerokratt-dsl"
-      tag: "pre-alpha-kube-1.13.33"
+      tag: "pre-alpha-kube-1.13.34"
   ruuter:
     dsl:
       path: "/DSL/"
