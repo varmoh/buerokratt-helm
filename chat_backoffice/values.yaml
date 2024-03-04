@@ -139,7 +139,7 @@ images:
   backoffice:
     registry: "ghcr.io"
     repository: "buerokratt/buerokratt-chatbot"
-    tag: "pre-alpha-test-2.3.11"
+    tag: "pre-alpha-test-2.2.11"
   analytics:
     registry: "ghcr.io"
     repository: "buerokratt/analytics-module"
