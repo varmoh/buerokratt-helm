@@ -111,7 +111,7 @@ images:
   ruuter:
     registry: "ghcr.io"
     repository: "buerokratt/ruuter"
-    tag: "pre-alpha-2.3.14-237" 
+    tag: "pre-alpha-2.5.1" 
   dmapper:
     registry: "ghcr.io"
     repository: "buerokratt/datamapper"
