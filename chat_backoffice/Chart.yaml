@@ -3,7 +3,7 @@ name: chat_backoffice
 description: A Helm chart for chat and backoffice services
 
 type: application
-version: 0.1.37
+version: 0.1.38
 
 dependencies:
   - name: postgresql
