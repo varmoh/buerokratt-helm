@@ -29,6 +29,13 @@ data:
           },
           {
             "label": {
+              "et": "Ootel",
+              "en": "Pending"
+            },
+            "path": "/pending"
+          },
+          {
+            "label": {
               "et": "Ajalugu",
               "en": "History"
             },
@@ -106,6 +113,13 @@ data:
                   "en": "Slots"
                 },
                 "path": "/training/slots"
+              },
+              {
+                "label": {
+                  "et": "Automatic Teenused",
+                  "en": "Automatic Services"
+                },
+                "path": "/auto-services"
               }
             ]
           },
@@ -195,13 +209,6 @@ data:
           },
           {
             "label": {
-              "et": "Bürokratt",
-              "en": "Burokratt"
-            },
-            "path": "/burokratt"
-          },
-          {
-            "label": {
               "et": "Tagasiside",
               "en": "Feedback"
             },
@@ -247,10 +254,10 @@ data:
           },
           {
             "label": {
-              "et": "Teemade järeltreenimine",
-              "en": "Followup Training"
+              "et": "Automatic Teenused",
+              "en": "Automatic Services"
             },
-            "path": "/followupTraining"
+            "path": "/auto-services"
           },
           {
             "label": {
