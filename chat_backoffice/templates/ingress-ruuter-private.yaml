@@ -16,7 +16,7 @@ metadata:
     nginx.ingress.kubernetes.io/cors-expose-headers: "X-B3-TraceId"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    #cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuerName | quote }}
+    cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
   labels:
     name: ruuter-private-ingress
 spec:
@@ -34,4 +34,4 @@ spec:
   tls:
   - hosts:
     - ruuter.{{ .Values.domain }}
-    secretName: byk-tls-ruuter-secret 
+    secretName: ruuter.test.buerokratt.ee0503prod

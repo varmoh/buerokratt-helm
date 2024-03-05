@@ -12,6 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, X-Requested-With, Content-Type, Cache-Control, Connection, Accept"
+    cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
   labels:
     name: notification-node-ingress
 spec:
@@ -29,4 +30,4 @@ spec:
   tls:
   - hosts:
     - ruuter.{{ .Values.domain }}
-    secretName: byk-tls-notification-node-secret 
+    secretName: ruuter.test.buerokratt.ee0503prod 
