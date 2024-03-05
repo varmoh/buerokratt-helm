@@ -7,8 +7,9 @@ data:
     REACT_APP_RUUTER_API_URL=https://ruuter.test.buerokratt.ee/v2/public/backoffice
     NODE_ENV=development
     CHOKIDAR_USEPOLLING=true
-    REACT_APP_API_URL=https://ruuter.test.buerokratt.ee/v2/private/analytics
-    REACT_APP_BUEROKRATT_CHATBOT_URL=http://byk-bot:5005
+#    REACT_APP_API_URL=https://ruuter.test.buerokratt.ee/v2/private/analytics
+    REACT_APP_API_URL=https://admin.test.buerokratt.ee/analytics
+    REACT_APP_BUEROKRATT_CHATBOT_URL=http://admin.test.buerokratt.ee
     REACT_APP_OPENSEARCH_DASHBOARD_URL=https://opensearch.org/
     REACT_APP_OPENDATAPORT_URL=https://avaandmed.eesti.ee
     REACT_APP_RUUTER_V2_PRIVATE_API_URL=https://ruuter.test.buerokratt.ee/v2/private/backoffice
@@ -18,6 +19,7 @@ data:
     REACT_APP_AUTH_BASE_URL=https://ruuter.test.buerokratt.ee
     REACT_APP_APP_PORT=3001
     REACT_APP_LOCAL=false
+    REACT_APP_BASE_API_PATH=/
     REACT_APP_AUTH_PATH=/v2/private/custom-jwt/userinfo
     REACT_APP_DOCKER_RUUTER=http://byk-ruuter-private:8080
     REACT_APP_CUSTOMER_SERVICE_LOGIN=http://admin.test.buerokratt.ee/et/dev-auth
