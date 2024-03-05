@@ -20,7 +20,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/note"
         backend:
           service:
             name: notification-node
