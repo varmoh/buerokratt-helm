@@ -21,7 +21,7 @@ spec:
             - name: config-volume
               mountPath: /app/env.development
               subPath: env.development
-          volumes:
-            - name: config-volume
-              configMap:
-                name: configmap-byk-analytics
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configmap-byk-analytics
