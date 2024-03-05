@@ -11,7 +11,7 @@ metadata:
 #    nginx.ingress.kubernetes.io/cors-allow-origin: "https://admin.test.buerokratt.ee, https://test.buerokratt.ee, https://ruuter.test.buerokratt.ee/v1/public/, https://ruuter.test.buerokratt.ee/v1/private/"
 #    nginx.ingress.kubernetes.io/configuration-snippet: |
 #      more_set_headers "Content-Length: 256";
-    #cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuerName | quote }}
+    cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
   labels:
     name: ruuter-byk-tim-ingress
 spec:
@@ -29,4 +29,4 @@ spec:
   tls:
   - hosts:
     - tim.{{ .Values.domain }}
-    secretName: byk-tls-tim-secret 
+    secretName: tim.test.buerokratt.ee0503prod 
