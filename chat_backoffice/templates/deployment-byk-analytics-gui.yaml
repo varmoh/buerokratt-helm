@@ -21,9 +21,9 @@ spec:
             - name: REACT_APP_RUUTER_API_URL
               value: "https://ruuter.test.buerokratt.ee/v2/public/backoffice"
             - name: NODE_ENV
-              value: development
+              value: "development"
             - name: CHOKIDAR_USEPOLLING
-              value: true
+              value: "true"
             - name: REACT_APP_API_URL
               value: "https://ruuter.test.buerokratt.ee/v2/private"
             - name: REACT_APP_BUEROKRATT_CHATBOT_URL
@@ -43,9 +43,9 @@ spec:
             - name: REACT_APP_AUTH_BASE_URL
               value: "https://ruuter.test.buerokratt.ee"
             - name: REACT_APP_APP_PORT
-              value: 3010
+              value: "3001"
             - name: REACT_APP_LOCAL
-              value: false
+              value: "false"
             - name: REACT_APP_AUTH_PATH
               value: /priv2/custom-jwt/userinfo
             - name: REACT_APP_DOCKER_RUUTER
