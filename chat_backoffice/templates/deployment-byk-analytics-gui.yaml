@@ -17,18 +17,23 @@ spec:
           ports:
             - containerPort: 3001
               name: http
-          envFrom:
-            - configMapRef:
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/env.development
+              subPath: env.development
+          volumes:
+            - name: config-volume
+              configMap:
                 name: configmap-byk-analytics
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3001
-            initialDelaySeconds: 5
-            periodSeconds: 11
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 3001
-            initialDelaySeconds: 10
-            periodSeconds: 11
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 3001
+        initialDelaySeconds: 5
+        periodSeconds: 11
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 3001
+        initialDelaySeconds: 10
+        periodSeconds: 11
