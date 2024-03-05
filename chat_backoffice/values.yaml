@@ -143,4 +143,4 @@ images:
   analytics:
     registry: "ghcr.io"
     repository: "buerokratt/analytics-module"
-    tag: "beta-1.2.8"
+    tag: "pre-alpha-1.4.8"
