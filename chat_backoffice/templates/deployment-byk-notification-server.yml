@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notifications-node
+  name: notification-node
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: notifications-node
+      app: notification-node
   template:
     metadata:
       labels:
-        app: notifications-node
+        app: notification-node
     spec:
       containers:
-        - name: notifications-node
+        - name: notification-node
           image: riaee/byk:notification-server-1.0.0 
           ports:
             - containerPort: 4040
