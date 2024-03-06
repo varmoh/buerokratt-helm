@@ -8,7 +8,7 @@ data:
     NODE_ENV=development
     CHOKIDAR_USEPOLLING=true
     REACT_APP_API_URL=https://ruuter.test.buerokratt.ee/v2/private
-    REACT_APP_BUEROKRATT_CHATBOT_URL=http://admin.test.buerokratt.ee
+    REACT_APP_BUEROKRATT_CHATBOT_URL=http://ruuter.test.buerokratt.ee/v2/private/backoffice
     REACT_APP_OPENSEARCH_DASHBOARD_URL=https://opensearch.org/
     REACT_APP_OPENDATAPORT_URL=https://avaandmed.eesti.ee
     REACT_APP_RUUTER_V2_PRIVATE_API_URL=https://ruuter.test.buerokratt.ee/v2/private/backoffice
