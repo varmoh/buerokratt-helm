@@ -51,7 +51,7 @@ spec:
             - name: REACT_APP_LOCAL
               value: "false"
             - name: REACT_APP_AUTH_PATH
-              value: "/v2/private/custom-jwt/backoffice/userinfo"
+              value: "/v2/private/backoffice/custom-jwt/userinfo"
             - name: REACT_APP_DOCKER_RUUTER
               value: "http://byk-ruuter-private:8080"
             - name: REACT_APP_CUSTOMER_SERVICE_LOGIN
@@ -70,6 +70,8 @@ spec:
               value: "https://admin.test.buerokratt.ee/monitoring"
             - name: REACT_APP_SERVICE_ID
               value: "analytics"
+            - name: REACT_APP_RUUTER_PRIVATE_API_URL
+              value: "https://ruuter.test.buerokratt.ee/v2/private/backoffice"
           livenessProbe:
             httpGet:
               path: /
