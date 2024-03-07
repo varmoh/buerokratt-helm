@@ -65,7 +65,7 @@ spec:
             - name: REACT_APP_SERVICES_BASE_URL
               value: "https://admin.test.buerokratt.ee/services"
             - name: REACT_APP_SETTINGS_BASE_URL
-              value: "https://admin.test.buerokratt.ee/settings"
+              value: "https://admin.test.buerokratt.ee/chat"
             - name: REACT_APP_MONITORING_BASE_URL
               value: "https://admin.test.buerokratt.ee/monitoring"
             - name: REACT_APP_SERVICE_ID
