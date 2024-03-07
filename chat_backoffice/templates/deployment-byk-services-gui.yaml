@@ -79,18 +79,6 @@ spec:
             - name: dsl
               mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}/private
               subPath: private/
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3006
-            initialDelaySeconds: 60
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 3006
-            initialDelaySeconds: 70
-            periodSeconds: 10
       initContainers:
         - name: dsl-installer
           image: {{ .Values.byk.dsl.image.registry }}/{{ .Values.byk.dsl.image.repository }}:{{ .Values.byk.dsl.image.tag }}
