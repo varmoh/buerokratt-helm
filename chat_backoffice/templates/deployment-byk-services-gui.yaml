@@ -70,14 +70,11 @@ spec:
               value: https://ruuter.test.buerokratt.ee/v2/private/backoffice
           volumeMounts:
             - name: dsl
-              mountPath: {{ .Values.byk.ruuter.dsl.path }}/public
-              subPath: public
+              mountPath: {{ .Values.byk.ruuter.dsl.path }}
+              subPath: public/
             - name: dsl
-              mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}/private
-              subPath: private
-            - name: config-volume
-              mountPath: /app/.env.development
-              subPath: .env.development
+              mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}
+              subPath: private/
       initContainers:
         - name: dsl-installer
           image: {{ .Values.byk.dsl.image.registry }}/{{ .Values.byk.dsl.image.repository }}:{{ .Values.byk.dsl.image.tag }}
@@ -93,7 +90,5 @@ spec:
       volumes:
         - name: dsl
           emptyDir: {}
-        - name: config-volume
-          configMap:
-            name: configmap-byk-services
+
 
