@@ -134,7 +134,7 @@ images:
     tag: "pre-alpha-1.2.0"
   training:
     registry: "ghcr.io"
-    repository: "/varmoh/training-module"
+    repository: "varmoh/training-module"
     tag: "pre-alpha-1.16.1"
   backoffice:
     registry: "ghcr.io"
