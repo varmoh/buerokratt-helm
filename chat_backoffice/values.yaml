@@ -29,7 +29,7 @@ byk:
     image:
       registry: "ghcr.io"
       repository: "buerokratt/buerokratt-dsl"
-      tag: "pre-alpha-kube-1.13.43"
+      tag: "pre-alpha-kube-1.13.50"
   ruuter:
     dsl:
       path: "/DSL/"
@@ -115,7 +115,7 @@ images:
   dmapper:
     registry: "ghcr.io"
     repository: "buerokratt/datamapper"
-    tag: "pre-alpha-19-2.2.5"
+    tag: "pre-alpha-19-2.2.9"
   resql:
     registry: "ghcr.io"
     repository: "buerokratt/resql"
@@ -129,13 +129,13 @@ images:
     repository: "buerokratt/chat-widget"
     tag: "pre-alpha-1.2.1"
   services:
-    registry: "ghcr.io"
-    repository: "buerokratt/service-module"
-    tag: "pre-alpha-1.2.0"
+    registry: "riaee"
+    repository: "byk"
+    tag: "servicemodule-1.0.0703"
   training:
     registry: "ghcr.io"
     repository: "varmoh/training-module"
-    tag: "pre-alpha-1.16.1"
+    tag: "pre-alpha-1.16.5"
   backoffice:
     registry: "ghcr.io"
     repository: "buerokratt/buerokratt-chatbot"
