@@ -29,7 +29,7 @@ byk:
     image:
       registry: "ghcr.io"
       repository: "buerokratt/buerokratt-dsl"
-      tag: "pre-alpha-kube-1.13.39"
+      tag: "pre-alpha-kube-1.13.43"
   ruuter:
     dsl:
       path: "/DSL/"
@@ -134,8 +134,8 @@ images:
     tag: "pre-alpha-1.2.0"
   training:
     registry: "ghcr.io"
-    repository: "buerokratt/training-module"
-    tag: "pre-alpha-1.12.1"
+    repository: "/varmoh/training-module"
+    tag: "pre-alpha-1.16.1"
   backoffice:
     registry: "ghcr.io"
     repository: "buerokratt/buerokratt-chatbot"
