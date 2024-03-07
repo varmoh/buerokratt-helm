@@ -15,12 +15,8 @@ spec:
         - name: byk-services-gui
           image: "{{ .Values.images.services.registry }}/{{ .Values.images.services.repository }}:{{ .Values.images.services.tag }}"
           ports:
-            - containerPort: 3006
+            - containerPort: 3001
               name: http
-          volumeMounts:
-            - name: config-volume
-              mountPath: /app/.env.development
-              subPath: env.development
           env:
             - name: REACT_APP_RUUTER_API_URL
               value: "https://ruuter.test.buerokratt.ee/v2/public/backoffice"
@@ -79,6 +75,9 @@ spec:
             - name: dsl
               mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}/private
               subPath: private/
+            - name: config-volume
+              mountPath: /app/.env.development
+              subPath: env.development
       initContainers:
         - name: dsl-installer
           image: {{ .Values.byk.dsl.image.registry }}/{{ .Values.byk.dsl.image.repository }}:{{ .Values.byk.dsl.image.tag }}
