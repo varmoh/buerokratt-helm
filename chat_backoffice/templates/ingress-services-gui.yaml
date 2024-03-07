@@ -25,7 +25,7 @@ spec:
           service:
             name: byk-services-gui
             port:
-              number: 3006
+              number: 3001
   tls:
   - hosts:
     - admin.{{ .Values.domain }}
