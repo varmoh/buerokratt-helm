@@ -5,5 +5,5 @@ metadata:
 spec:
   containers:
   - name: notifications-container
-    image: riaee/byk:sse-notifications080303
+    image: riaee/byk:sse-notifications080304
     
