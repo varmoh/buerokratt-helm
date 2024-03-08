@@ -29,7 +29,7 @@ byk:
     image:
       registry: "ghcr.io"
       repository: "buerokratt/buerokratt-dsl"
-      tag: "pre-alpha-kube-1.13.50"
+      tag: "pre-alpha-kube-1.13.51"
   ruuter:
     dsl:
       path: "/DSL/"
@@ -115,7 +115,7 @@ images:
   dmapper:
     registry: "ghcr.io"
     repository: "buerokratt/datamapper"
-    tag: "pre-alpha-19-2.2.9"
+    tag: "pre-alpha-19-2.2.10"
   resql:
     registry: "ghcr.io"
     repository: "buerokratt/resql"
