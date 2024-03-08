@@ -2,7 +2,14 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: sse-notifications-pod
+  labels:
+    app: notifications
+  annotations:
+    "kubectl.kubernetes.io/restartedAt": "{{ .NOW }}"
+    "ttlSecondsAfterFinished": "60"
 spec:
   containers:
   - name: sse-notifications-container
     image: riaee/byk:sse-notifications080301 
+
+restartPolicy: Never
