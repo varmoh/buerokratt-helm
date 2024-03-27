@@ -27,18 +27,6 @@ spec:
             - mountPath: /app/public/env-config.js
               name: widget-index-volume
               subPath: env-config.js
-          livenessProbe:
-            httpGet:
-              path: /status
-              port: 3003
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /status
-              port: 3003
-            initialDelaySeconds: 15
-            periodSeconds: 10
       volumes:
         - name: widget-index-volume
           configMap:
