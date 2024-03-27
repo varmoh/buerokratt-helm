@@ -7,6 +7,6 @@ spec:
     app: byk-widget
   ports:
     - port: 3003
-      targetPort: 3003
+      targetPort: http
       protocol: TCP
       name: http
