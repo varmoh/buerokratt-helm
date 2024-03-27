@@ -135,7 +135,7 @@ images:
   training:
     registry: "ghcr.io"
     repository: "buerokratt/training-module"
-    tag: "pre-alpha-clean-1.16.5"
+    tag: "pre-alpha-clean-1.15.2"
   backoffice:
     registry: "ghcr.io"
     repository: "buerokratt/buerokratt-chatbot"
