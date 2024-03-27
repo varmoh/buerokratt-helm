@@ -48,7 +48,7 @@ byk:
   liquibase:
     dsl:
       repo: https://github.com/buerokratt/Buerokratt-DSL.git
-      path: DSL/Liquibase
+      path: Liquibase
   tim:
     env:
       security:
