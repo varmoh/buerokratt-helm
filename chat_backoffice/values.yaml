@@ -47,8 +47,8 @@ byk:
       path: "/workspace/app/module"
   liquibase:
     dsl:
-      repo: https://github.com/buerokratt/Buerokratt-DSL.git
-      path: Liquibase
+      repo: https://github.com/buerokratt/Buerokratt-Chatbot.git
+      path: DSL/Liquibase
   tim:
     env:
       security:
