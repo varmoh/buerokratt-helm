@@ -29,7 +29,7 @@ byk:
     image:
       registry: "ghcr.io"
       repository: "buerokratt/buerokratt-dsl"
-      tag: "pre-alpha-kube-1.13.51"
+      tag: "pre-alpha-kube-1.13.63"
   ruuter:
     dsl:
       path: "/DSL/"
@@ -47,7 +47,7 @@ byk:
       path: "/workspace/app/module"
   liquibase:
     dsl:
-      repo: https://github.com/buerokratt/Buerokratt-Chatbot.git
+      repo: https://github.com/buerokratt/Buerokratt-DSL.git
       path: DSL/Liquibase
   tim:
     env:
@@ -127,19 +127,19 @@ images:
   widget:
     registry: "ghcr.io"
     repository: "buerokratt/chat-widget"
-    tag: "pre-alpha-1.2.1"
+    tag: "pre-alpha-1.3.2"
   services:
-    registry: "riaee"
-    repository: "byk"
-    tag: "servicemodule-1.0.0703"
+    registry: "ghcr.io"
+    repository: "buerokratt/service-module"
+    tag: "pre-alpha-1.3.0"
   training:
     registry: "ghcr.io"
-    repository: "varmoh/training-module"
-    tag: "pre-alpha-1.16.5"
+    repository: "buerokratt/training-module"
+    tag: "pre-alpha-clean-1.16.5"
   backoffice:
     registry: "ghcr.io"
     repository: "buerokratt/buerokratt-chatbot"
-    tag: "pre-alpha-test-2.2.11"
+    tag: "pre-alpha-test-2.2.12"
   analytics:
     registry: "ghcr.io"
     repository: "buerokratt/analytics-module"

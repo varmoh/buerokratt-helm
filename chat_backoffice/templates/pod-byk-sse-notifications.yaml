@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: notifications-pod
-spec:
-  containers:
-  - name: notifications-container
-    image: riaee/byk:sse-notifications080304
-    

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Job
+metadata:
+  name: notifications-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: notifications-container
+        image: riaee/byk:sse-notifications2603
+      restartPolicy: Never
+  backoffLimit: 1
+  template:
+    metadata:
+      annotations:
+        "helm.sh/hook": pre-install
+        "helm.sh/hook-weight": "1"
+    spec:
+      containers:
+      - name: notifications-container
+        image: riaee/byk:sse-notifications2603
+      restartPolicy: Never
+      initContainers:
+      - name: wait-for-opensearch
+        image: busybox
+        command: ['sh', '-c', 'until nc -z opensearch-node 9200; do sleep 1; done;']

@@ -35,3 +35,15 @@ data:
       }
     </style>
     </html>
+  env-config.js: |2
+      window._env_ = {
+        RUUTER_API_URL: 'https://ruuter.test.buerokratt.ee/v2/public/backoffice',
+        NOTIFICATION_NODE_URL: 'https://ruuter.test.buerokratt.ee',
+        TIM_AUTHENTICATION_URL: 'https://tim.test.buerokratt.ee/oauth2/authorization/tara?callback_url=https://test.buerokratt.ee',
+        OFFICE_HOURS: {
+          TIMEZONE: 'Europe/Tallinn',
+          BEGIN: 0,
+          END: 24,
+          DAYS: [1, 2, 3, 4, 5],
+        },
+      };

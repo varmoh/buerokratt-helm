@@ -24,6 +24,9 @@ spec:
             - name: widget-config
               mountPath: /etc/nginx/conf.d/default.conf
               subPath: nginx.conf
+            - mountPath: /app/public/env-config.js
+              name: widget-index-volume
+              subPath: env-config.js
           livenessProbe:
             httpGet:
               path: /status
