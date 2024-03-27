@@ -26,6 +26,8 @@ spec:
               value: "true"
             - name: application.logging.displayResponseContent
               value: "true"
+            - name: application.openSearchConfiguration.url
+              value: http://opensearch-node:9200
           volumeMounts:
             - name: dsl
               mountPath: {{ .Values.byk.ruuter.dsl.path }}

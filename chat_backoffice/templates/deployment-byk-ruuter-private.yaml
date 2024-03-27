@@ -28,6 +28,8 @@ spec:
               value: "true"
             - name: application.cors.allowedOrigins
               value: https://admin.test.buerokratt.ee
+            - name: application.openSearchConfiguration.url
+              value: http://opensearch-node:9200
           volumeMounts:
             - name: dsl
               mountPath: {{ .Values.byk.ruuterPrivate.dsl.path }}

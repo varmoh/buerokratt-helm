@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: notification-node
-          image: riaee/byk:notification-server-1.0.0 
+          image: riaee/byk:notification-server-1.0.6 
           ports:
             - containerPort: 4040
           env:
