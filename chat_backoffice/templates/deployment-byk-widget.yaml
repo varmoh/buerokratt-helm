@@ -15,7 +15,7 @@ spec:
         - name: byk-widget
           image: "{{ .Values.images.widget.registry }}/{{ .Values.images.widget.repository }}:{{ .Values.images.widget.tag }}"
           ports:
-            - containerPort: 80
+            - containerPort: 3003
               name: http
           volumeMounts:
             - name: widget-index-volume
