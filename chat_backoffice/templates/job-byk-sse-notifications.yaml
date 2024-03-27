@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: notifications-container
-        image: riaee/byk:sse-notifications2603
+        image: riaee/byk:sse-notifications260312
         # Add your container spec here
       restartPolicy: Never
       initContainers:
